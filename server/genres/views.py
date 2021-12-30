@@ -4,7 +4,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 from genres.models import Genres, Author
-from genres.serializers import GenresSerializer, GenresDetailSerializer, AuthorDetailSerializer
+from genres.serializers import GenresSerializer
+from manga.serializers import GenresDetailSerializer, AuthorDetailSerializer
 
 from rest_framework import status
 

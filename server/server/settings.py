@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'storages',
 
-    'genres.apps.GenresConfig'
+    'genres.apps.GenresConfig',
     'manga.apps.MangaConfig',
-    'chapter.apps.ChaperConfig',
+    'chapter.apps.ChapterConfig',
     'users.apps.UsersConfig'
 ]
 

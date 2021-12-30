@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from chapter.serializers import ChapterSerializer
+from genres.models import Author, Genres
 
 from genres.serializers import AuthorSerializer, GenresSerializer
 from .models import Manga, Comment
@@ -42,3 +43,28 @@ class MangaDetailSerializer(serializers.ModelSerializer):
         serializer = ChapterSerializer(chapters, many=True)
         return serializer.data
     
+
+class GenresDetailSerializer(serializers.ModelSerializer):
+    mangas = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Genres
+        fields = '__all__'
+
+    def get_mangas(self, obj):
+        mangas = obj.manga_genres.all()
+        serializer = MangaSerializer(mangas, many=True)
+        return serializer.data
+
+
+class AuthorDetailSerializer(serializers.ModelSerializer):
+    mangas = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Author
+        fields = '__all__'
+
+    def get_mangas(self, obj):
+        mangas = obj.manga_set.all()
+        serializer = MangaSerializer(mangas, many=True)
+        return serializer.data

@@ -4,6 +4,8 @@ import uuid
 from manga.models import *
 
 # Create your models here.
+
+
 class Chapter(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
@@ -20,8 +22,9 @@ class ChapterImage(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     chapter = models.ForeignKey(Chapter, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(null=True, blank=True, default='/placeholder.png', upload_to='/chapters')
-    page = models.IntegerField(null=True, blank=True)      
+    image = models.ImageField(
+        null=True, blank=True, default='/chapters/default.png', upload_to='chapters')
+    page = models.IntegerField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

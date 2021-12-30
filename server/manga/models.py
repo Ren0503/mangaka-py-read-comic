@@ -14,7 +14,7 @@ class Manga(models.Model):
     image = models.ImageField(null=True, blank=True,
                               default='/placeholder.png')
     genres = models.ManyToManyField(
-        Genres, related_name='genres', blank=True)
+        Genres, related_name='manga_genres', blank=True)
     description = models.TextField(null=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, blank=True)
     status = models.CharField(max_length=200, null=True, blank=True)

@@ -14,6 +14,9 @@ from rest_framework import status
 def getChapter(request, pk):
     try:
         chapter = Chapter.objects.get(_id=pk)
+        chapter.views += 1
+        chapter.save()
+
         serializer = ChapterDetailSerializer(chapter, many=False)
         return Response(serializer.data)
     except Exception as e:

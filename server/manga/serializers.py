@@ -34,7 +34,7 @@ class MangaDetailSerializer(serializers.ModelSerializer):
         return serializer.data
 
     def get_comments(self, obj):
-        comments = obj.comment_sel.all()
+        comments = obj.comment_set.all()
         serializer = CommentSerializer(comments, many=True)
         return serializer.data
 

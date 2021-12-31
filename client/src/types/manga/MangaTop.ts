@@ -1,7 +1,7 @@
-import { Manga } from '.';
+import { MangaList } from '.'
 
 export interface MangaTopState {
-	mangas: Manga[];
+	mangas: MangaList[];
 	loading?: boolean;
 	error?: undefined;
 }
@@ -18,7 +18,7 @@ export interface MangaTopRequestAction {
 
 export interface MangaTopSuccessAction {
 	type: MangaTopActionTypes.MANGA_TOP_SUCCESS;
-	payload: Manga[];
+	payload: MangaList[];
 }
 
 export interface MangaTopFailureAction {

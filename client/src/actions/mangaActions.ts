@@ -74,7 +74,7 @@ export const createMangaComment = (
 			}
 		}
 
-        await axios.post(`api/manga/${mangaId}/comments/`, comment, config)
+        await axios.post(`/api/manga/${mangaId}/comments/`, comment, config)
 
         dispatch({
             type: MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_SUCCESS

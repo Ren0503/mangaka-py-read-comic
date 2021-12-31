@@ -27,11 +27,6 @@ const Header = () => {
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Search />
                         <Nav className='ml-auto'>
-                            <Link to='/cart'>
-                                <Nav.Link>
-                                    <i className='fas fa-shopping-cart'></i> Cart
-                                </Nav.Link>
-                            </Link>
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
                                     <Link to='/profile'>

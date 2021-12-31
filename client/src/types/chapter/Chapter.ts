@@ -12,6 +12,6 @@ export interface ChapterImage {
     createdAt: string
 }
 
-export interface ChapterDetail {
+export interface ChapterDetail extends Chapter{
     chapterImages: Array<ChapterImage>
 }

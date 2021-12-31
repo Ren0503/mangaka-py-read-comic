@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Stack } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 const Search = () => {
@@ -13,19 +13,21 @@ const Search = () => {
     }
 
     return (
-        <Form onSubmit={submitHandler} className='flex'>
-            <Form.Control
-                type='text'
-                name='search'
-                onChange={(e) => setKeyword(e.target.value)}
-                value={keyword}
-                placeholder='Search Manga...'
-                className='mr-sm-2 ml-sm-5'
-            />
-            <Button type='submit' variant='outline-success' className='p-2'>
-                Search
-            </Button>
-        </Form>
+        <Stack direction='horizontal' gap={2}>
+            <Form onSubmit={submitHandler} className='flex'>
+                <Form.Control
+                    type='text'
+                    name='search'
+                    onChange={(e) => setKeyword(e.target.value)}
+                    value={keyword}
+                    placeholder='Search Manga...'
+                    className='mr-sm-2 ml-sm-5'
+                />
+                <Button type='submit' variant='outline-success' className='p-2'>
+                    Search
+                </Button>
+            </Form>
+        </Stack>
     )
 }
 

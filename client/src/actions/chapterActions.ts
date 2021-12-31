@@ -7,7 +7,7 @@ import {
     ChapterDetailActionTypes
 } from 'types/chapter'
 
-export const chapterDetail = (id: string): AppThunk => async (
+export const detailChapter = (id: string): AppThunk => async (
     dispatch
 ) => {
     try {

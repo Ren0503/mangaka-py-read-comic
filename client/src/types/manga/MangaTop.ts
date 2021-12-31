@@ -1,7 +1,7 @@
 import { Manga } from '.';
 
 export interface MangaTopState {
-	products: Manga[];
+	mangas: Manga[];
 	loading?: boolean;
 	error?: undefined;
 }

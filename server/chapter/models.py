@@ -30,7 +30,7 @@ class ChapterImage(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     chapter = models.ForeignKey(Chapter, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(
+    image = models.FileField(
         null=True, blank=True, default='/chapters/default.png', upload_to=get_file_path)
     page = models.IntegerField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)

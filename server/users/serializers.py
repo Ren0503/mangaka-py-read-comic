@@ -44,7 +44,7 @@ class UserSerializerWithToken(UserSerializer):
 
 class FavoriteSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(read_only=True)
-    mangas = serializers.SerializerMethodField(read_only=True)
+    manga = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Favorite
@@ -55,7 +55,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
         serializer = UserSerializer(user, many=False)
         return serializer.data
 
-    def get_mangas(self, obj):
+    def get_manga(self, obj):
         manga = obj.manga
         serializer = MangaSerializer(manga, many=False)
         return serializer.data

@@ -11,6 +11,6 @@ urlpatterns = [
     path('profile/', views.getUserProfile, name="users-profile"),
     path('profile/update/', views.updateUserProfile, name="user-profile-update"),
 
-    path('add/', views.addFavorite, name='favorites-add'),
+    path('add/<str:pk>/', views.addFavorite, name='favorites-add'),
     path('my_favorites/', views.getMyFavorites, name='my_favorites'),
 ]

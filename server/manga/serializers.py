@@ -7,9 +7,16 @@ from .models import Manga, Comment
 
 
 class MangaSerializer(serializers.ModelSerializer):
+    chapters = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Manga
         fields = '__all__'
+
+    def get_chapters(self, obj):
+        chapters = obj.chapter_set.all()
+        serializer = ChapterSerializer(chapters, many=True)
+        return serializer.data
 
 
 class CommentSerializer(serializers.ModelSerializer):

@@ -20,14 +20,19 @@ from rest_framework import status
 @api_view(['GET'])
 def getMangas(request):
     query = request.query_params.get('keyword')
+    sort = request.query_params.get('sort')
+
     if query == None:
         query = ''
 
+    if sort == None:
+        sort = '-createdAt'
+
     mangas = Manga.objects.filter(
-        name__icontains=query).order_by('-createdAt')
+        name__icontains=query).order_by(sort)
 
     page = request.query_params.get('page')
-    paginator = Paginator(mangas, 15)
+    paginator = Paginator(mangas, 12)
 
     try:
         mangas = paginator.page(page)
@@ -82,6 +87,11 @@ def createMangaComment(request, pk):
             name=user.first_name,
             body=data['body'],
         )
+
+        comments = manga.comment_set.all()
+        manga.numComments = len(comments)
+
+        manga.save()
 
         return Response('Comment Added')
     except Exception as e:

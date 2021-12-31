@@ -95,12 +95,12 @@ def getUserProfile(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def addFavorite(request):
+def addFavorite(request, pk):
     try:
         user = request.user
         data = request.data
 
-        manga = Manga.objects.get(_id=data['manga'])
+        manga = Manga.objects.get(_id=pk)
 
         favorite = Favorite.objects.create(
             user=user,

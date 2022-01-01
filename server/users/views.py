@@ -98,7 +98,6 @@ def getUserProfile(request):
 def addFavorite(request, pk):
     try:
         user = request.user
-        data = request.data
 
         manga = Manga.objects.get(_id=pk)
 

@@ -58,15 +58,14 @@ def searchAdvanced(request):
             query[i] = query[i].capitalize()
         print(query)
 
-        genres = Genres.objects.filter(name__in=query)
+        genres = Genres.objects.filter(name__in=query)[0:1]
         print(genres)
 
         query_genres = []
         for i in genres:
             query_genres.append(i._id)
 
-            
-        mangas = Manga.objects.filter(genres__in=query_genres).order_by(sort)
+        mangas = Manga.objects.filter(genres=genres).order_by(sort).distinct()
 
         page = request.query_params.get('page')
         paginator = Paginator(mangas, 12)

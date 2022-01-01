@@ -113,6 +113,23 @@ def addFavorite(request, pk):
         return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
 
 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteFavorite(request, pk):
+    try:
+        user = request.user
+
+        favorite = Favorite.objects.get(_id=pk)
+
+        if user == favorite.user:
+            favorite.delete()
+            return Response('Favorite was deleted')
+        else:
+            return Response({'Not Authorized'}, status=status.HTTP_401_UNAUTHORIZED)
+    except Exception as e:
+        return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getMyFavorites(request):

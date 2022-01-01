@@ -1,11 +1,11 @@
-import React from 'react';
-import { Pagination } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Pagination } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 interface PaginateProps {
-	pages: number;
-	page: number;
-	keyword?: string;
+	pages: number
+	page: number
+	keyword?: string
 }
 
 const Paginate = ({
@@ -31,7 +31,7 @@ const Paginate = ({
 				</Pagination>
 			)}
 		</>
-	);
-};
+	)
+}
 
-export default Paginate;
+export default Paginate

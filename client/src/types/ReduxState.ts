@@ -21,6 +21,10 @@ import {
     FavoriteUserState,
 } from './favorite'
 
+import {
+    GenreListState
+} from './genres'
+
 export interface ReduxState {
     userLogin: UserLoginState
 	userRegister: UserRegisterState
@@ -33,4 +37,5 @@ export interface ReduxState {
     chapterDetail: ChapterDetailState
     favoriteAdd: FavoriteAddState
     favoriteUser: FavoriteUserState
+    genreList: GenreListState
 }

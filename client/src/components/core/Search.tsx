@@ -14,7 +14,7 @@ const Search = () => {
 
     return (
         <Stack direction='horizontal' gap={2}>
-            <Form onSubmit={submitHandler} className='flex'>
+            <Form onSubmit={submitHandler}>
                 <Form.Control
                     type='text'
                     name='search'

@@ -23,6 +23,9 @@ import {
     favoriteUserReducer,
 } from './favoriteReducers'
 
+import {
+    genresListReducer
+} from './genreReducer'
 
 import { ReduxState } from 'types/ReduxState';
 
@@ -38,6 +41,7 @@ const reducer = combineReducers<ReduxState>({
     chapterDetail: chapterDetailReducer,
     favoriteAdd: favoriteAddReducer,
     favoriteUser: favoriteUserReducer,
+    genreList: genresListReducer,
 });
 
 export default reducer;

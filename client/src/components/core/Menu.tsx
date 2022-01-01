@@ -12,6 +12,7 @@ const Menu = () => {
     const { error, loading, genres } = useSelector(
         (state: ReduxState) => state.genreList
     )
+
     useEffect(() => {
         if (genres.length === 0) dispatch(listGenres())
         console.log(genres)
@@ -19,8 +20,8 @@ const Menu = () => {
 
     const genresDisplay = () => {
         if (loading) return <Loader />;
-		else if (error) return <Message variant='danger'>{error}</Message>;
-		else
+        else if (error) return <Message variant='danger'>{error}</Message>;
+        else
             return (
                 <NavDropdown title="Genres" id="collasible-nav-dropdown">
                     {genres.map((genre) => (
@@ -34,16 +35,23 @@ const Menu = () => {
 
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">Home</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
                             {genresDisplay()}
-                            <Nav.Link href="/about">About</Nav.Link>
-
-                            <Nav.Link href="/contact">Contact</Nav.Link>
+                            <NavDropdown title="Sort" id="collasible-nav-dropdown">
+                                <NavDropdown.Item href="/genre">Latest</NavDropdown.Item>
+                                <NavDropdown.Item href="/genre">Views</NavDropdown.Item>
+                                <NavDropdown.Item href="/genre">A to Z</NavDropdown.Item>
+                                <NavDropdown.Item href="/genre">Rating</NavDropdown.Item>
+                            </NavDropdown>
+                            <Nav.Link href="/about">For Male</Nav.Link>
+                            <Nav.Link href="/contact">For Female</Nav.Link>
+                            <Nav.Link href="/contact">Search Adv</Nav.Link>
+                            <Nav.Link href="/contact">Group</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

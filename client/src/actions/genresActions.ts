@@ -7,7 +7,7 @@ import {
     GenreListActionTypes,
 } from 'types/genres'
 
-export const listGenres = (): AppThunk => async (dispatch, getState) => {
+export const listGenres = (): AppThunk => async (dispatch) => {
     try {
         dispatch({ type: GenreListActionTypes.GENRE_LIST_REQUEST })
 

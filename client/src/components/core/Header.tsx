@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Container, Nav, Navbar, NavDropdown, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ import { ReduxState } from 'types/ReduxState'
 import { logout } from 'actions'
 import { AppDispatch } from 'store'
 import Search from './Search'
+import logo from 'assets/header.png'
 
 const Header = () => {
     const history = useHistory()
@@ -18,10 +19,12 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+            <Navbar expand='lg' collapseOnSelect>
                 <Container>
                     <Link to='/'>
-                        <Navbar.Brand>Mangakan</Navbar.Brand>
+                        <Navbar.Brand>
+                            <Image src={logo} alt="Logo" width="80" className="avatar" />                            
+                        </Navbar.Brand>
                     </Link>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse id='basic-navbar-nav'>

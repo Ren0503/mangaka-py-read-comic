@@ -2,7 +2,7 @@ import { Genre } from "."
 
 export interface GenreListState {
     genres: Genre[]
-    loading: boolean
+    loading?: boolean
     error?: undefined
 }
 

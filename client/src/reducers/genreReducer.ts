@@ -18,7 +18,7 @@ export const genresListReducer = (
         case GenreListActionTypes.GENRE_LIST_REQUEST:
             return {
                 loading: true,
-                genres: []
+                genres: initialGenreListState.genres
             }
         case GenreListActionTypes.GENRE_LIST_SUCCESS:
             return {
@@ -27,7 +27,6 @@ export const genresListReducer = (
             }
         case GenreListActionTypes.GENRE_LIST_FAILURE:
             return {
-                loading: initialGenreListState.loading,
                 genres: initialGenreListState.genres,
                 error: action.payload
             }

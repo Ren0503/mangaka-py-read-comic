@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from manga.models import Manga, Comment
+from manga.models import Manga, Comment, Rating
 from manga.serializers import MangaSerializer, MangaDetailSerializer
 
 from rest_framework import status
@@ -94,5 +94,31 @@ def createMangaComment(request, pk):
         manga.save()
 
         return Response('Comment Added')
+    except Exception as e:
+        return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createStar(request, pk):
+    try:
+        user = request.user
+        manga = Manga.objects.get(_id=pk)
+        data = request.data
+
+        rating = Rating.objects.create(
+            user=user,
+            manga=manga,
+            rate=data['rate']
+        )
+
+        stars = manga.rating_set.all()
+        total = 0
+        for i in stars:
+            total += i.rate
+
+        manga.star = total / len(stars)
+        manga.save()
+
     except Exception as e:
         return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)

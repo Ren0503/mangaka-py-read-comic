@@ -22,7 +22,10 @@ import {
 } from './favorite'
 
 import {
-    GenreListState
+    GenreListState,
+    GenreDetailState,
+    AuthorDetailState,
+    AdvSearchState,
 } from './genres'
 
 export interface ReduxState {
@@ -38,4 +41,7 @@ export interface ReduxState {
     favoriteAdd: FavoriteAddState
     favoriteUser: FavoriteUserState
     genreList: GenreListState
+    genreDetail: GenreDetailState
+    authorDetail: AuthorDetailState
+    advSearch: AdvSearchState
 }

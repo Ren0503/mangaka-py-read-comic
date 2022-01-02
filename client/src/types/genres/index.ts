@@ -1,2 +1,5 @@
 export * from './Genre'
 export * from './GenreList'
+export * from './AuthorDetail'
+export * from './GenreDetail'
+export * from './AdvancedSearch'

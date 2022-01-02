@@ -24,7 +24,10 @@ import {
 } from './favoriteReducers'
 
 import {
-    genresListReducer
+    genresListReducer,
+    genreDetailReducer,
+    authorDetailReducer,
+    advSearchReducer,
 } from './genreReducer'
 
 import { ReduxState } from 'types/ReduxState';
@@ -42,6 +45,9 @@ const reducer = combineReducers<ReduxState>({
     favoriteAdd: favoriteAddReducer,
     favoriteUser: favoriteUserReducer,
     genreList: genresListReducer,
+    genreDetail: genreDetailReducer,
+    authorDetail: authorDetailReducer,
+    advSearch: advSearchReducer,
 });
 
 export default reducer;

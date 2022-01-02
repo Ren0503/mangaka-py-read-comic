@@ -53,7 +53,7 @@ export const addFavorite = (mangaId: string): AppThunk => async (dispatch, getSt
             }
         }
 
-		await axios.get(`/api/users/add/${mangaId}/`, config)
+		await axios.get(`/api/users/favorite/${mangaId}/`, config)
 
 		dispatch({
 			type: FavoriteAddActionTypes.FAVORITE_ADD_SUCCESS

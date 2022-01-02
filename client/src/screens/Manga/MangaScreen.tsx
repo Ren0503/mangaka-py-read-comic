@@ -105,7 +105,7 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                                     Status: {manga.status}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Genres: {manga.genres.map((genre) => (<Badge>{genre.name}</Badge>))}
+                                    Genres: {manga.genres.map((genre) => (<Badge> {genre.name} </Badge>))}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     Views: {manga.views}

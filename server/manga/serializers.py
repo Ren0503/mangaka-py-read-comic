@@ -3,7 +3,7 @@ from chapter.serializers import ChapterSerializer
 from genres.models import Author, Genres
 
 from genres.serializers import AuthorSerializer, GenresSerializer
-from .models import Manga, Comment
+from .models import Manga, Review
 
 
 class MangaSerializer(serializers.ModelSerializer):
@@ -19,16 +19,16 @@ class MangaSerializer(serializers.ModelSerializer):
         return serializer.data
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Comment
+        model = Review
         fields = '__all__'
 
 
 class MangaDetailSerializer(serializers.ModelSerializer):
     genres = GenresSerializer(many=True, read_only=True)
     author = serializers.SerializerMethodField(read_only=True)
-    comments = serializers.SerializerMethodField(read_only=True)
+    reviews = serializers.SerializerMethodField(read_only=True)
     chapters = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -40,9 +40,9 @@ class MangaDetailSerializer(serializers.ModelSerializer):
         serializer = AuthorSerializer(author, many=False)
         return serializer.data
 
-    def get_comments(self, obj):
-        comments = obj.comment_set.all()
-        serializer = CommentSerializer(comments, many=True)
+    def get_reviews(self, obj):
+        reviews = obj.review_set.all()
+        serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
 
     def get_chapters(self, obj):

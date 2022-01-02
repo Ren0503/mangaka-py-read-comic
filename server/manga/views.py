@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from manga.models import Manga, Comment, Rating
+from manga.models import Manga, Review
 from manga.serializers import MangaSerializer, MangaDetailSerializer
 
 from rest_framework import status
@@ -72,53 +72,42 @@ def getManga(request, pk):
 # User
 # ----------------------------
 
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def createMangaComment(request, pk):
-    try:
-        user = request.user
-        manga = Manga.objects.get(_id=pk)
-        data = request.data
+def createMangaReview(request, pk):
+    user = request.user
+    manga = Manga.objects.get(_id=pk)
+    data = request.data
 
-        comment = Comment.objects.create(
+    # 1 - Review already exists
+    alreadyExists = manga.review_set.filter(user=user).exists()
+    if alreadyExists:
+        content = {'detail': 'Manga already reviewed'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    # 2 - No Rating or 0
+    elif data['rating'] == 0:
+        content = {'detail': 'Please select a rating'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    # 3 - Create review
+    else:
+        review = Review.objects.create(
             user=user,
             manga=manga,
             name=user.first_name,
-            body=data['body'],
+            rating=data['rating'],
+            comment=data['comment'],
         )
 
-        comments = manga.comment_set.all()
-        manga.numComments = len(comments)
+        reviews = manga.review_set.all()
+        manga.numReviews = len(reviews)
 
-        manga.save()
-
-        return Response('Comment Added')
-    except Exception as e:
-        return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
-
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def createStar(request, pk):
-    try:
-        user = request.user
-        manga = Manga.objects.get(_id=pk)
-        data = request.data
-
-        rating = Rating.objects.create(
-            user=user,
-            manga=manga,
-            rate=data['rate']
-        )
-
-        stars = manga.rating_set.all()
         total = 0
-        for i in stars:
-            total += i.rate
+        for i in reviews:
+            total += i.rating
 
-        manga.star = total / len(stars)
+        manga.rating = total / len(reviews)
         manga.save()
 
-    except Exception as e:
-        return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
+        return Response('Review Added')

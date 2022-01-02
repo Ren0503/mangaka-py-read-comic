@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from django.contrib.auth.models import User
+from django.db.models import Q
 from manga.models import Manga
 
 from users.models import Favorite
@@ -95,36 +96,25 @@ def getUserProfile(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def addFavorite(request, pk):
+def handleFavorite(request, pk):
     try:
         user = request.user
 
         manga = Manga.objects.get(_id=pk)
 
-        favorite = Favorite.objects.create(
-            user=user,
-            manga=manga
-        )
+        favorite = Favorite.objects.filter(Q(manga=manga) & Q(user=user))
 
-        serializer = FavoriteSerializer(favorite, many=False)
-        return Response(serializer.data)
-    except Exception as e:
-        return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
-
-
-@api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
-def deleteFavorite(request, pk):
-    try:
-        user = request.user
-
-        favorite = Favorite.objects.get(_id=pk)
-
-        if user == favorite.user:
+        if (favorite):
             favorite.delete()
             return Response('Favorite was deleted')
         else:
-            return Response({'Not Authorized'}, status=status.HTTP_401_UNAUTHORIZED)
+            createdFavorite = Favorite.objects.create(
+                user=user,
+                manga=manga
+            )
+
+            serializer = FavoriteSerializer(createdFavorite, many=False)
+            return Response(serializer.data)
     except Exception as e:
         return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
 

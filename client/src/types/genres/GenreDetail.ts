@@ -1,8 +1,8 @@
-import { Manga } from "types/manga"
+import { MangaList } from "types/manga"
 import { Genre } from "."
 
 export interface GenreDetail extends Genre {
-	mangas: Manga[]
+	mangas: MangaList[]
 }
 
 export interface GenreDetailState {

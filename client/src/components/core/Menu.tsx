@@ -4,10 +4,14 @@ import { Loader, Message } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from 'store'
 import { ReduxState } from 'types/ReduxState'
-import { Col, Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap'
+import { Badge, Col, Container, Figure, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const Menu = () => {
+interface MenuProps {
+    isNavbar?: boolean
+}
+
+const Menu = ({ isNavbar = true }: MenuProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const { error, loading, genres } = useSelector(
         (state: ReduxState) => state.genreList
@@ -18,44 +22,69 @@ const Menu = () => {
         console.log(genres)
     }, [dispatch, genres])
 
-    const genresDisplay = () => {
+    const navGenresDisplay = () => {
         if (loading) return <Loader />;
         else if (error) return <Message variant='danger'>{error}</Message>;
         else
             return (
-                <NavDropdown title="Genres" id="collasible-nav-dropdown">
-                    {genres.map((genre) => (
-                        <Link to={`/genres/${genre._id}`}>
-                            <NavDropdown.Item href="/genre">{genre.name}</NavDropdown.Item>
-                        </Link>
-                    ))}
-                </NavDropdown>
+                <Navbar className='menu' collapseOnSelect variant="dark">
+                    <Container>
+                        <Navbar.Brand href="/">Home</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="mr-auto">
+                                <NavDropdown title="Genres" id="collasible-nav-dropdown">
+                                    <Row>
+                                        {genres.map((genre) => (
+                                            <Col md={6}>
+                                                <Link to={`/genres/${genre._id}`}>
+                                                    <NavDropdown.Item href="/genre">{genre.name}</NavDropdown.Item>
+                                                </Link>
+                                            </Col>
+                                        ))}
+                                    </Row>
+                                </NavDropdown>
+                                <NavDropdown title="Sort" id="collasible-nav-dropdown">
+                                    <NavDropdown.Item href="/genre">Latest</NavDropdown.Item>
+                                    <NavDropdown.Item href="/genre">Views</NavDropdown.Item>
+                                    <NavDropdown.Item href="/genre">A to Z</NavDropdown.Item>
+                                    <NavDropdown.Item href="/genre">Rating</NavDropdown.Item>
+                                </NavDropdown>
+                                <Nav.Link href="/about">For Male</Nav.Link>
+                                <Nav.Link href="/contact">For Female</Nav.Link>
+                                <Nav.Link href="/contact">Search Adv</Nav.Link>
+                                <Nav.Link href="/contact">Group</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+            )
+    }
+
+    const tagGenresDisplay = () => {
+        if (loading) return <Loader />;
+        else if (error) return <Message variant='danger'>{error}</Message>;
+        else
+            return (
+                <>
+                    <Figure>
+                        {genres.map((genre) => (
+                            <Badge className="tag">
+                                {genre.name}
+                            </Badge>
+                        ))}
+                    </Figure>
+                </>
             )
     }
 
     return (
         <>
-            <Navbar collapseOnSelect bg="dark" variant="dark">
-                <Container>
-                    <Navbar.Brand href="/">Home</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                            {genresDisplay()}
-                            <NavDropdown title="Sort" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="/genre">Latest</NavDropdown.Item>
-                                <NavDropdown.Item href="/genre">Views</NavDropdown.Item>
-                                <NavDropdown.Item href="/genre">A to Z</NavDropdown.Item>
-                                <NavDropdown.Item href="/genre">Rating</NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link href="/about">For Male</Nav.Link>
-                            <Nav.Link href="/contact">For Female</Nav.Link>
-                            <Nav.Link href="/contact">Search Adv</Nav.Link>
-                            <Nav.Link href="/contact">Group</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            {isNavbar ? (
+                <>{navGenresDisplay()}</>
+            ) : (
+                <>{tagGenresDisplay()}</>
+            )}
         </>
     )
 }

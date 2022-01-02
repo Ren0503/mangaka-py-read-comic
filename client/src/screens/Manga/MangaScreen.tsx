@@ -8,7 +8,8 @@ import {
     Card,
     Button,
     Form,
-    Badge
+    Badge,
+    Table
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -32,8 +33,8 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
     },
     history
 }: MangaScreenProps) => {
-	const [rating, setRating] = useState<number>(0)
-	const [comment, setComment] = useState<string>('')
+    const [rating, setRating] = useState<number>(0)
+    const [comment, setComment] = useState<string>('')
     const [show, setShow] = useState<number>(4)
 
     const dispatch = useDispatch<AppDispatch>()
@@ -84,8 +85,8 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
     }
 
     const mangaDetailDisplay = () => {
-        if (loading) return <Loader />
-        else if (error) return <Message variant='danger'>{error}</Message>
+        if (loading || loadingAddFavorite) return <Loader />
+        else if (error || errorAddFavorite) return <Message variant='danger'>{error}</Message>
         else if (!manga)
             return <Message variant='danger'>Manga Not Found</Message>
         else
@@ -125,27 +126,38 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                         <h4>Description</h4>
                         <p>{manga.description}</p>
                     </Row>
-                    <ListGroup>
-                        <h4>Chapters</h4>
-                        {manga.chapters.slice(0, show).map((chapter, index) => (
-                            <ListGroup.Item key={chapter._id}>
-                                <Row>
-                                    <Col>{index + 1}</Col>
-                                    <Col>{chapter.name}</Col>
-                                    <Col>{chapter.views}</Col>
-                                    <Col>{chapter.createdAt.substring(0, 10)}</Col>
-                                </Row>
-                            </ListGroup.Item>
-                        ))}
-
-                        {manga.chapters.length > 4 &&
-                            <div style={{ margin: 'auto' }}>
-                                <Button className='btn btn-red' onClick={handleShowMore}>
-                                    <i className="fas fa-angle-down"></i>
-                                </Button>
-                            </div>
-                        }
-                    </ListGroup>
+                    <h4>Chapters</h4>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>NAME</th>
+                                <th>VIEWS</th>
+                                <th>DETAIL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {manga.chapters.slice(0, show).map((chapter, index) => (
+                                <tr key={chapter._id}>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        <Link to={`/chapter/${chapter._id}`}>
+                                            {chapter.name}
+                                        </Link>
+                                    </td>
+                                    <td>{chapter.views}</td>
+                                    <td>{chapter.createdAt.substring(0, 10)}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                    {manga.chapters.length > 4 &&
+                        <div style={{ margin: 'auto' }}>
+                            <Button className='btn btn-red' onClick={handleShowMore}>
+                                <i className="fas fa-angle-down"></i>
+                            </Button>
+                        </div>
+                    }
                     <Row className='my-3'>
                         <Col md={6}>
                             <h2>Reviews</h2>

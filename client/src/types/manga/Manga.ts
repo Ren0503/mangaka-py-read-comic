@@ -1,5 +1,5 @@
-import { Chapter } from 'types/chapter';
-import { Author, Genre } from 'types/genres';
+import { Chapter } from 'types/chapter'
+import { Author, Genre } from 'types/genres'
 
 export interface Manga {
     _id: string
@@ -8,14 +8,19 @@ export interface Manga {
     description: string
     status: string
     views: number
+    star: number
+    favorites: number
+    numComments: number
+    chapters: Array<Chapter>
     createdAt: string
 }
 
-export interface Comment {
+export interface Review {
     _id: string
     user: string
     name: string
-    body: string
+    rating: number
+    comment: string
     createdAt: string
 }
 
@@ -26,7 +31,6 @@ export interface MangaList extends Manga {
 
 export interface MangaDetail extends Manga {
     author: Author
-    genre: Array<Genre>
-    comments: Array<Comment>
-    chapters: Array<Chapter>
+    genres: Array<Genre>
+    reviews: Array<Review>
 }

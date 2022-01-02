@@ -94,7 +94,7 @@ def getUserProfile(request):
         return Response({'details': f"{e}"}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def handleFavorite(request, pk):
     try:
@@ -106,6 +106,9 @@ def handleFavorite(request, pk):
 
         if (favorite):
             favorite.delete()
+            manga.favorites -= 1
+            manga.save()
+
             return Response('Favorite was deleted')
         else:
             createdFavorite = Favorite.objects.create(
@@ -113,6 +116,8 @@ def handleFavorite(request, pk):
                 manga=manga
             )
 
+            manga.favorites += 1
+            manga.save()
             serializer = FavoriteSerializer(createdFavorite, many=False)
             return Response(serializer.data)
     except Exception as e:

@@ -70,10 +70,10 @@ const TopManga = ({ isSidebar = true }: TopMangaProps) => {
                     {mangas.map((manga) => (
                         <ListGroup.Item key={manga._id}>
                             <Row>
-                                <Col md={2}>
+                                <Col md={3}>
                                     <Image src={manga.image} width="50" />
                                 </Col>
-                                <Col md={10}>
+                                <Col md={9}>
                                     <strong>{manga.name}</strong>
                                     <p>{manga.views}</p>
                                 </Col>

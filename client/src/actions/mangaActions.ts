@@ -7,7 +7,7 @@ import {
     MangaDetailActionTypes,
     MangaList,
     MangaDetail,
-    MangaCreateCommentActionTypes,
+    MangaCreateReviewActionTypes,
     MangaTopActionTypes
 } from 'types/manga'
 
@@ -56,13 +56,13 @@ export const detailManga = (id: string): AppThunk => async (
 	}
 }
 
-export const createMangaComment = (
+export const createMangaReview = (
     mangaId: string,
-    comment: { body: string }
+    review: { rating: number, comment: string }
 ): AppThunk => async (dispatch, getState) => {
     try {
         dispatch({
-            type: MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_REQUEST
+            type: MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_REQUEST
         })
 
         const { userInfo } = getState().userLogin
@@ -74,14 +74,14 @@ export const createMangaComment = (
 			}
 		}
 
-        await axios.post(`/api/manga/${mangaId}/comments/`, comment, config)
+        await axios.post(`/api/manga/${mangaId}/reviews/`, review, config)
 
         dispatch({
-            type: MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_SUCCESS
+            type: MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_SUCCESS
         })
     } catch (error) {
         dispatch({
-            type: MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_FAILURE,
+            type: MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_FAILURE,
             payload: errorHandler(error)
         })
     }

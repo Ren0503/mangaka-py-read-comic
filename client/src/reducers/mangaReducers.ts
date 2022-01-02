@@ -8,9 +8,9 @@ import {
     MangaTopAction,
     MangaTopActionTypes,
     MangaTopState,
-    MangaCreateCommentAction,
-    MangaCreateCommentActionTypes,
-    MangaCreateCommentState,
+    MangaCreateReviewAction,
+    MangaCreateReviewActionTypes,
+    MangaCreateReviewState,
 } from 'types/manga'
 
 const initialMangaListState: MangaListState = {
@@ -107,27 +107,27 @@ export const mangaTopReducer = (
     }
 }
 
-const initialMangaCreateCommentState: MangaCreateCommentState = {
+const initialMangaCreateReviewState: MangaCreateReviewState = {
     loading: false
 }
 
-export const mangaCreateCommentReducer = (
-    state: MangaCreateCommentState = initialMangaCreateCommentState,
-    action: MangaCreateCommentAction
+export const mangaCreateReviewReducer = (
+    state: MangaCreateReviewState = initialMangaCreateReviewState,
+    action: MangaCreateReviewAction
 ) => {
     switch(action.type) {
-        case MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_REQUEST:
+        case MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_REQUEST:
             return { loading: true }
-        case MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_SUCCESS:
+        case MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_SUCCESS:
             return {
-                loading: initialMangaCreateCommentState.loading,
+                loading: initialMangaCreateReviewState.loading,
                 success: true
             }
-        case MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_FAILURE:
+        case MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_FAILURE:
             return {
                 error: action.payload
             }
-        case MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_RESET:
+        case MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_RESET:
             return {}
         default:
             return state

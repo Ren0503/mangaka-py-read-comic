@@ -9,7 +9,7 @@ import {
     MangaListState,
     MangaDetailState,
     MangaTopState,
-    MangaCreateCommentState,
+    MangaCreateReviewState,
 } from './manga'
 
 import {
@@ -33,7 +33,7 @@ export interface ReduxState {
     mangaList: MangaListState
     mangaDetail: MangaDetailState
     mangaTop: MangaTopState
-    mangaCreateComment: MangaCreateCommentState
+    mangaCreateReview: MangaCreateReviewState
     chapterDetail: ChapterDetailState
     favoriteAdd: FavoriteAddState
     favoriteUser: FavoriteUserState

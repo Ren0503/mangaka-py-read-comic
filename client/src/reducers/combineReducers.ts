@@ -11,7 +11,7 @@ import {
     mangaListReducer,
     mangaDetailReducer,
     mangaTopReducer,
-    mangaCreateCommentReducer,
+    mangaCreateReviewReducer,
 } from './mangaReducers'
 
 import {
@@ -37,7 +37,7 @@ const reducer = combineReducers<ReduxState>({
     mangaList: mangaListReducer,
     mangaDetail: mangaDetailReducer,
     mangaTop: mangaTopReducer,
-    mangaCreateComment: mangaCreateCommentReducer,
+    mangaCreateReview: mangaCreateReviewReducer,
     chapterDetail: chapterDetailReducer,
     favoriteAdd: favoriteAddReducer,
     favoriteUser: favoriteUserReducer,

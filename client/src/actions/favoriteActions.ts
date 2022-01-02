@@ -38,3 +38,30 @@ export const listFavorites = (): AppThunk => async (dispatch, getState) => {
 		})
 	}
 }
+
+export const addFavorite = (mangaId: string): AppThunk => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: FavoriteAddActionTypes.FAVORITE_ADD_REQUEST
+		})
+
+		const { userInfo } = getState().userLogin
+        const config = {
+            headers: {
+                'Content-Type': 'Application/json',
+                Authorization: `Bearer ${userInfo?.token}`
+            }
+        }
+
+		await axios.get(`/api/users/add/${mangaId}/`, config)
+
+		dispatch({
+			type: FavoriteAddActionTypes.FAVORITE_ADD_SUCCESS
+		})
+	} catch (error) {
+		dispatch({
+			type: FavoriteAddActionTypes.FAVORITE_ADD_FAILURE,
+			payload: errorHandler(error)
+		})
+	}
+}

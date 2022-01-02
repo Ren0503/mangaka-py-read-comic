@@ -7,15 +7,18 @@ import {
     ListGroup,
     Card,
     Button,
-    Form
+    Form,
+    Badge
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Loader, Message } from 'components/shared'
 import { ReduxState } from 'types/ReduxState'
 import { AppDispatch } from 'store'
-import { detailManga, createMangaComment } from 'actions'
-import { MangaCreateCommentActionTypes } from 'types/manga'
+import { detailManga, addFavorite, createMangaReview } from 'actions'
+import { MangaCreateReviewActionTypes } from 'types/manga'
+import { Rating, TopManga } from 'components/manga'
+import { FavoriteAddActionTypes } from 'types/favorite'
 
 interface MatchParams {
     id: string
@@ -29,7 +32,9 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
     },
     history
 }: MangaScreenProps) => {
-    const [body, setBody] = useState<string>('')
+	const [rating, setRating] = useState<number>(0)
+	const [comment, setComment] = useState<string>('')
+    const [show, setShow] = useState<number>(4)
 
     const dispatch = useDispatch<AppDispatch>()
     const { userInfo } = useSelector((state: ReduxState) => state.userLogin)
@@ -37,23 +42,45 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
         (state: ReduxState) => state.mangaDetail
     )
     const {
-        error: errorMangaComment,
-        loading: loadingMangaComment,
-        success: successMangaComment
-    } = useSelector((state: ReduxState) => state.mangaCreateComment)
+        error: errorMangaReview,
+        loading: loadingMangaReview,
+        success: successMangaReview
+    } = useSelector((state: ReduxState) => state.mangaCreateReview)
+
+    const {
+        loading: loadingAddFavorite,
+        error: errorAddFavorite,
+        success: successAddFavorite,
+    } = useSelector((state: ReduxState) => state.favoriteAdd)
 
     useEffect(() => {
-        if (successMangaComment)
+        if (successAddFavorite) {
             dispatch({
-                type: MangaCreateCommentActionTypes.MANGA_CREATE_COMMENT_RESET
+                type: FavoriteAddActionTypes.FAVORITE_ADD_RESET
             })
+        }
+
+        if (successMangaReview) {
+            dispatch({
+                type: MangaCreateReviewActionTypes.MANGA_CREATE_REVIEW_RESET
+            })
+        }
 
         dispatch(detailManga(id))
-    }, [id, dispatch, successMangaComment])
+    }, [id, dispatch, successMangaReview, successAddFavorite])
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(createMangaComment(id, { body }))
+        dispatch(createMangaReview(id, { rating, comment }))
+    }
+
+    const addFavoriteHandler = (mangaId: string) => {
+        dispatch(addFavorite(mangaId))
+    }
+
+    const handleShowMore = () => {
+        if (manga)
+            setShow(manga.chapters.length)
     }
 
     const mangaDetailDisplay = () => {
@@ -64,52 +91,96 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
         else
             return (
                 <>
+                    <h3 className='text-center'>{manga.name}</h3>
                     <Row>
-                        <Col md={6}>
+                        <Col md={4}>
                             <Image src={manga.image} alt={manga.name} fluid />
                         </Col>
-                        <Col md={3}>
+                        <Col md={8}>
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
-                                    <h3>{manga.name}</h3>
+                                    Author: {manga.author.name}
                                 </ListGroup.Item>
-                                <ListGroup.Item>Status: ${manga.status}</ListGroup.Item>
                                 <ListGroup.Item>
-                                    Description: {manga.description}
+                                    Status: {manga.status}
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                    Genres: {manga.genres.map((genre) => (<Badge>{genre.name}</Badge>))}
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                    Views: {manga.views}
                                 </ListGroup.Item>
                             </ListGroup>
-                        </Col>
-                        <Col md={3}>
-                            <ListGroup>
-                                {manga.chapters.map((chapter) => (
-                                    <ListGroup.Item>
-                                        {chapter.name}
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
+                            <Rating value={manga.star} />
+                            <Button
+                                type="button"
+                                className="btn-red"
+                                onClick={() => addFavoriteHandler(manga._id)}
+                            >
+                                Add to Favorite
+                            </Button>
                         </Col>
                     </Row>
+                    <Row>
+                        <h4>Description</h4>
+                        <p>{manga.description}</p>
+                    </Row>
+                    <ListGroup>
+                        <h4>Chapters</h4>
+                        {manga.chapters.slice(0, show).map((chapter, index) => (
+                            <ListGroup.Item key={chapter._id}>
+                                <Row>
+                                    <Col>{index + 1}</Col>
+                                    <Col>{chapter.name}</Col>
+                                    <Col>{chapter.views}</Col>
+                                    <Col>{chapter.createdAt.substring(0, 10)}</Col>
+                                </Row>
+                            </ListGroup.Item>
+                        ))}
+
+                        {manga.chapters.length > 4 &&
+                            <div style={{ margin: 'auto' }}>
+                                <Button className='btn btn-red' onClick={handleShowMore}>
+                                    <i className="fas fa-angle-down"></i>
+                                </Button>
+                            </div>
+                        }
+                    </ListGroup>
                     <Row className='my-3'>
                         <Col md={6}>
-                            <h2>Comments</h2>
-                            {manga.comments.length === 0 && <Message>No Comment</Message>}
+                            <h2>Reviews</h2>
+                            {manga.reviews.length === 0 && <Message>No Reviews</Message>}
                             <ListGroup variant='flush'>
                                 {userInfo &&
                                     <ListGroup.Item>
                                         <h2>Writer a viewer comment</h2>
-                                        {errorMangaComment && (
-                                            <Message variant='danger'>{errorMangaComment}</Message>
+                                        {errorMangaReview && (
+                                            <Message variant='danger'>{errorMangaReview}</Message>
                                         )}
-                                        {loadingMangaComment && <Loader />}
+                                        {loadingMangaReview && <Loader />}
                                         <Form onSubmit={submitHandler}>
+                                            <Form.Group controlId='rating'>
+                                                <Form.Label>Rating</Form.Label>
+                                                <Form.Control
+                                                    as='select'
+                                                    value={rating}
+                                                    onChange={(e) => setRating(Number(e.target.value))}>
+                                                    <option value=''>Select...</option>
+                                                    <option value='1'>1 - Poor</option>
+                                                    <option value='2'>2 - Fair</option>
+                                                    <option value='3'>3 - Good</option>
+                                                    <option value='4'>4 - Very Good</option>
+                                                    <option value='5'>5 - Excellent</option>
+                                                </Form.Control>
+                                            </Form.Group>
                                             <Form.Group controlId='comment'>
                                                 <Form.Label>Write your comment</Form.Label>
                                                 <Form.Control
                                                     as='textarea'
                                                     rows={3}
-                                                    value={body}
+                                                    value={comment}
                                                     onChange={(e) =>
-                                                        setBody(e.target.value)
+                                                        setComment(e.target.value)
                                                     }></Form.Control>
                                             </Form.Group>
                                             <Button type='submit' variant='primary'>
@@ -119,11 +190,12 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                                     </ListGroup.Item>
                                 }
 
-                                {manga.comments.map((comment) => (
-                                    <ListGroup.Item key={comment._id}>
-                                        <strong>{comment.name}</strong>
-                                        <p>{comment.createdAt.substring(0, 10)}</p>
-                                        <p>{comment.body}</p>
+                                {manga.reviews.map((review) => (
+                                    <ListGroup.Item key={review._id}>
+                                        <strong>{review.name}</strong>
+                                        <Rating value={review.rating} />
+                                        <p>{review.createdAt.substring(0, 10)}</p>
+                                        <p>{review.comment}</p>
                                     </ListGroup.Item>
                                 ))}
                             </ListGroup>
@@ -134,9 +206,14 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
     }
 
     return (
-        <>
-            {mangaDetailDisplay()}
-        </>
+        <Row>
+            <Col md={9}>
+                {mangaDetailDisplay()}
+            </Col>
+            <Col md={3}>
+                <TopManga isSidebar={true} />
+            </Col>
+        </Row>
     )
 }
 

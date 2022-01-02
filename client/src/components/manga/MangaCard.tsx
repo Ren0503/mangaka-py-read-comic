@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 
 import { MangaList as MangaType } from 'types/manga'
+import { Rating } from '.'
 
 interface MangaProps {
 	manga: MangaType
@@ -22,7 +23,11 @@ const MangaCard: FunctionComponent<MangaProps> = ({
 						<strong>{manga.name}</strong>
 					</Card.Title>
 				</Link>
-				<Card.Text as='h6'>{manga.views}</Card.Text>
+				<Card.Text as='div'>
+					<Rating
+						value={manga.star}
+					/>
+				</Card.Text>
 			</Card.Body>
 		</Card>
 	)

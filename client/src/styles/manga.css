@@ -52,7 +52,12 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
+
 .content-manga p {
     color: #a6a6a6;
     font-size: 13px;
+}
+
+.chapter {
+    color: #999;
 }

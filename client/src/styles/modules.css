@@ -87,5 +87,5 @@
 }
   
 .tag:hover::after {
-     border-left-color: #ff6800; 
+    border-left-color: #ff6800; 
 }

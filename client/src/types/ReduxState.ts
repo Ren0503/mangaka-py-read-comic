@@ -13,7 +13,8 @@ import {
 } from './manga'
 
 import {
-    ChapterDetailState
+    ChapterDetailState, 
+    ChapterListState
 } from './chapter'
 
 import {
@@ -38,6 +39,7 @@ export interface ReduxState {
     mangaTop: MangaTopState
     mangaCreateReview: MangaCreateReviewState
     chapterDetail: ChapterDetailState
+    chapterList: ChapterListState
     favoriteAdd: FavoriteAddState
     favoriteUser: FavoriteUserState
     genreList: GenreListState

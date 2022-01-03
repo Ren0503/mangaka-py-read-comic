@@ -150,7 +150,7 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                                 <tr key={chapter._id}>
                                     <td>{index + 1}</td>
                                     <td>
-                                        <Link to={`/chapter/${chapter._id}`}>
+                                        <Link to={`/manga/${manga._id}/chapter/${chapter._id}`}>
                                             {chapter.name}
                                         </Link>
                                     </td>
@@ -167,7 +167,7 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                             </Button>
                         </div>
                     }
-                    <Row className='my-3'>
+                    <div className='my-3'>
                         <h2>Reviews</h2>
                         {manga.reviews.length === 0 && <Message>No Reviews</Message>}
                         <ListGroup variant='flush'>
@@ -219,7 +219,7 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
-                    </Row>
+                    </div>
                 </>
             )
     }

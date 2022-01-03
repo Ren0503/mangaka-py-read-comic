@@ -32,8 +32,8 @@ const MangaCard: FunctionComponent<MangaProps> = ({
 				</Card.Text>
 			</Card.Body>
 
-			{manga.chapters.slice(0, 3).map((chapter) => (
-				<Link to={`/chapter/${chapter._id}`} key={chapter._id}>
+			{manga.chapters.slice(0, 1).map((chapter) => (
+				<Link to={`/manga/${manga._id}/chapter/${chapter._id}`} key={chapter._id}>
 					<span className="chapter">
 						{chapter.name}
 					</span>

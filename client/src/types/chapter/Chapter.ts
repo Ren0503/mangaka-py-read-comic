@@ -2,6 +2,7 @@ export interface Chapter {
     _id: string
     name: string
     views: number
+    number: number
     createdAt: string
 }
 

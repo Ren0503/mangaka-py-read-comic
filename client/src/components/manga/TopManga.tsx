@@ -14,23 +14,24 @@ import 'slick-carousel/slick/slick-theme.css'
 
 const settings = {
     className: "center",
-    centerMode: true,
+    centerMode: false,
     infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 4,
+    slidesToShow: 3,
+    autoplay: true,
     speed: 500,
+    dots: true,
     responsive: [
         {
             breakpoint: 1024,
             settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
+                slidesToShow: 3,
+                slidesToScroll: 3,
                 infinite: true,
                 dots: true
             }
         },
         {
-            breakpoint: 800,
+            breakpoint: 960,
             settings: {
                 slidesToShow: 2,
                 slidesToScroll: 2,
@@ -38,14 +39,15 @@ const settings = {
             }
         },
         {
-            breakpoint: 480,
+            breakpoint: 600,
             settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1
             }
         }
     ]
-}
+};
+
 
 interface TopMangaProps {
     isSidebar: boolean
@@ -71,11 +73,13 @@ const TopManga = ({ isSidebar = true }: TopMangaProps) => {
                         <ListGroup.Item key={manga._id}>
                             <Row>
                                 <Col md={3}>
-                                    <Image src={manga.image} width="50" />
+                                    <Link to={`manga/${manga._id}`}>
+                                        <Image src={manga.image} width="50" />
+                                    </Link>
                                 </Col>
                                 <Col md={9}>
                                     <strong>{manga.name}</strong>
-                                    <p>{manga.views}</p>
+                                    <p className="chapter"><i className='fas fa-eye'></i> {manga.views}</p>
                                 </Col>
                             </Row>
                         </ListGroup.Item>
@@ -91,16 +95,13 @@ const TopManga = ({ isSidebar = true }: TopMangaProps) => {
             return (
                 <Slider {...settings}>
                     {mangas.map((manga) => (
-                        <>
-                            <div className="top-manga">
-                                <img src={manga.image} />
-                                <div className="content-manga">
-                                    <h4 className="name">{manga.name}</h4>
-                                    <p>{manga.description.substring(0, 60)}</p>
-                                </div>
+                        <div className="top-manga">
+                            <img src={manga.image} />
+                            <div className="content-manga">
+                                <h4 className="name">{manga.name}</h4>
+                                <p>{manga.description.substring(0, 80)} ...</p>
                             </div>
-                        </>
-
+                        </div>
                     ))}
                 </Slider>
             )

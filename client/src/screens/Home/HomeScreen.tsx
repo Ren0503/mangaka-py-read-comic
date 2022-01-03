@@ -62,29 +62,31 @@ const HomeScreen = ({
                 <Row>
                     <Col md={9}>
                         <>
-                            <h2>Latest Manga</h2>
-                            <ButtonGroup className="text-right">
-                                <Button onClick={() => setSortType('Rating')}>
-                                    Rating
-                                </Button>
-                                <Button onClick={() => setSortType('Views')}>
-                                    Views
-                                </Button>
-                                <Button onClick={() => setSortType('Newest')}>
-                                    Newest
-                                </Button>
-                                <Button onClick={() => setSortType('Oldest')}>
-                                    Oldest
-                                </Button>
-                            </ButtonGroup>
+                            <Row className="justify-content-between">
+                                <h2>Latest Manga</h2>
+                                <ButtonGroup>
+                                    <Button className='btn-dark' onClick={() => setSortType('Rating')}>
+                                        Rating
+                                    </Button>
+                                    <Button className='btn-dark' onClick={() => setSortType('Views')}>
+                                        Views
+                                    </Button>
+                                    <Button className='btn-dark' onClick={() => setSortType('Newest')}>
+                                        Newest
+                                    </Button>
+                                    <Button className='btn-dark' onClick={() => setSortType('Oldest')}>
+                                        Oldest
+                                    </Button>
+                                </ButtonGroup>
+                            </Row>
                             <Row>
                                 {mangas
                                     ?.sort(handleSorting())
                                     .map((manga) => (
-                                    <Col sm={12} md={6} lg={4} xl={3} key={manga._id}>
-                                        <MangaCard manga={manga} />
-                                    </Col>
-                                ))}
+                                        <Col sm={12} md={6} lg={4} xl={3} key={manga._id}>
+                                            <MangaCard manga={manga} />
+                                        </Col>
+                                    ))}
                             </Row>
                             {pages && page && (
                                 <Paginate
@@ -103,13 +105,15 @@ const HomeScreen = ({
     }
 
     return (
-        <Container fluid>
-            <h2>Browser Manga</h2>
-            <TopManga isSidebar={false} />
+        <Container>
+            <div className="my-5">
+                <h4><strong>Browser Manga</strong></h4>
+                <TopManga isSidebar={false} />
+            </div>
 
-            <Container>
+            <div>
                 {displayMangas()}
-            </Container>
+            </div>
         </Container>
     )
 }

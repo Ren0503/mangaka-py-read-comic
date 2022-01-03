@@ -19,7 +19,6 @@ const Menu = ({ isNavbar = true }: MenuProps) => {
 
     useEffect(() => {
         if (genres.length === 0) dispatch(listGenres())
-        console.log(genres)
     }, [dispatch, genres])
 
     const navGenresDisplay = () => {

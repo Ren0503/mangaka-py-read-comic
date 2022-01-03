@@ -138,7 +138,7 @@ const ProfileScreen = ({ history }: ProfileScreenProps) => {
                                 <tr key={favorite._id}>
                                     <td>{index + 1}</td>
                                     <td>
-                                        <Image src={favorite.manga.image} alt={favorite.manga.name} fluid />
+                                        <Image src={favorite.manga.image} alt={favorite.manga.name} height="200" />
                                     </td>
                                     <td>{favorite.manga.name}</td>
                                     <td>

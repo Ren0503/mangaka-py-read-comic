@@ -8,8 +8,8 @@ import {
 export default function GenreRoutes() {
     return (
         <Switch>
-            <Route path='/genres/:id' component={GenreScreen} />
-            <Route path='/author/:id' component={AuthorScreen} />
+            <Route path='/genres/:genreId' component={GenreScreen} />
+            <Route path='/author/:authorId' component={AuthorScreen} />
         </Switch>
     )
 };

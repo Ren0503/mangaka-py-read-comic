@@ -12,14 +12,14 @@ import { AppDispatch } from 'store'
 import { ReduxState } from 'types/ReduxState'
 
 interface MatchParams {
-    id: string
+    genreId: string
 }
 
 interface GenreScreenProps extends RouteComponentProps<MatchParams> { }
 
 const GenreScreen: FunctionComponent<GenreScreenProps> = ({
     match: {
-        params: { id }
+        params: { genreId }
     }
 }: GenreScreenProps) => {
     const dispatch = useDispatch<AppDispatch>()
@@ -28,8 +28,8 @@ const GenreScreen: FunctionComponent<GenreScreenProps> = ({
     )
 
     useEffect(() => {
-        dispatch(detailGenre(id))
-    }, [id, dispatch])
+        dispatch(detailGenre(genreId))
+    }, [genreId, dispatch])
 
     const genreDetailDisplay = () => {
         if (loading) return <Loader />

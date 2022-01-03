@@ -8,8 +8,8 @@ import {
 export default function HomeRoutes() {
     return (
         <Switch>
-            <Route path='/manga/:id' component={MangaScreen} />
-            <Route path='/chapter/:id' component={ChapterScreen} />
+            <Route path='/manga/:mangaId' component={MangaScreen} exact />
+            <Route path='/manga/:mangaId/chapter/:chapterId' component={ChapterScreen} exact />
         </Switch>
     )
 };

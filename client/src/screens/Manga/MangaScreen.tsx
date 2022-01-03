@@ -22,14 +22,14 @@ import { Rating, TopManga } from 'components/manga'
 import { FavoriteAddActionTypes } from 'types/favorite'
 
 interface MatchParams {
-    id: string
+    mangaId: string
 }
 
 interface MangaScreenProps extends RouteComponentProps<MatchParams> { }
 
 const MangaScreen: FunctionComponent<MangaScreenProps> = ({
     match: {
-        params: { id }
+        params: { mangaId }
     },
     history
 }: MangaScreenProps) => {
@@ -67,12 +67,12 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
             })
         }
 
-        dispatch(detailManga(id))
-    }, [id, dispatch, successMangaReview, successAddFavorite])
+        dispatch(detailManga(mangaId))
+    }, [mangaId, dispatch, successMangaReview, successAddFavorite])
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(createMangaReview(id, { rating, comment }))
+        dispatch(createMangaReview(mangaId, { rating, comment }))
     }
 
     const addFavoriteHandler = (mangaId: string) => {
@@ -101,17 +101,17 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                             <Rating value={manga.rating} />
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
-                                    Author:
+                                    <i className='fas fa-user'></i> Author:
                                     <Link to={`/author/${manga.author._id}`}>
                                         {manga.author.name}
                                     </Link>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Status: {manga.status}
+                                    <i className='fas fa-rss'></i> Status: {manga.status}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Genres: {manga.genres.map((genre) => (
-                                        <Link to={`/genre/${genre._id}`}>
+                                    <i className='fas fa-tags'></i> Genres: {manga.genres.map((genre) => (
+                                        <Link to={`/genres/${genre._id}`}>
                                             <div className="tag" key={genre._id}>
                                                 {genre.name}
                                             </div>
@@ -119,7 +119,7 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                                     ))}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Views: {manga.views}
+                                    <i className='fas fa-eye'></i> Views: {manga.views}
                                 </ListGroup.Item>
                             </ListGroup>
                             <Button
@@ -168,59 +168,57 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                         </div>
                     }
                     <Row className='my-3'>
-                        <Col md={6}>
-                            <h2>Reviews</h2>
-                            {manga.reviews.length === 0 && <Message>No Reviews</Message>}
-                            <ListGroup variant='flush'>
-                                {userInfo &&
-                                    <ListGroup.Item>
-                                        <h2>Writer a viewer comment</h2>
-                                        {errorMangaReview && (
-                                            <Message variant='danger'>{errorMangaReview}</Message>
-                                        )}
-                                        {loadingMangaReview && <Loader />}
-                                        <Form onSubmit={submitHandler}>
-                                            <Form.Group controlId='rating'>
-                                                <Form.Label>Rating</Form.Label>
-                                                <Form.Control
-                                                    as='select'
-                                                    value={rating}
-                                                    onChange={(e) => setRating(Number(e.target.value))}>
-                                                    <option value=''>Select...</option>
-                                                    <option value='1'>1 - Poor</option>
-                                                    <option value='2'>2 - Fair</option>
-                                                    <option value='3'>3 - Good</option>
-                                                    <option value='4'>4 - Very Good</option>
-                                                    <option value='5'>5 - Excellent</option>
-                                                </Form.Control>
-                                            </Form.Group>
-                                            <Form.Group controlId='comment'>
-                                                <Form.Label>Write your comment</Form.Label>
-                                                <Form.Control
-                                                    as='textarea'
-                                                    rows={3}
-                                                    value={comment}
-                                                    onChange={(e) =>
-                                                        setComment(e.target.value)
-                                                    }></Form.Control>
-                                            </Form.Group>
-                                            <Button type='submit' variant='primary'>
-                                                Submit
-                                            </Button>
-                                        </Form>
-                                    </ListGroup.Item>
-                                }
+                        <h2>Reviews</h2>
+                        {manga.reviews.length === 0 && <Message>No Reviews</Message>}
+                        <ListGroup variant='flush'>
+                            {userInfo &&
+                                <ListGroup.Item>
+                                    <h2>Writer a viewer comment</h2>
+                                    {errorMangaReview && (
+                                        <Message variant='danger'>{errorMangaReview}</Message>
+                                    )}
+                                    {loadingMangaReview && <Loader />}
+                                    <Form onSubmit={submitHandler}>
+                                        <Form.Group controlId='rating'>
+                                            <Form.Label>Rating</Form.Label>
+                                            <Form.Control
+                                                as='select'
+                                                value={rating}
+                                                onChange={(e) => setRating(Number(e.target.value))}>
+                                                <option value=''>Select...</option>
+                                                <option value='1'>1 - Poor</option>
+                                                <option value='2'>2 - Fair</option>
+                                                <option value='3'>3 - Good</option>
+                                                <option value='4'>4 - Very Good</option>
+                                                <option value='5'>5 - Excellent</option>
+                                            </Form.Control>
+                                        </Form.Group>
+                                        <Form.Group controlId='comment'>
+                                            <Form.Label>Write your comment</Form.Label>
+                                            <Form.Control
+                                                as='textarea'
+                                                rows={3}
+                                                value={comment}
+                                                onChange={(e) =>
+                                                    setComment(e.target.value)
+                                                }></Form.Control>
+                                        </Form.Group>
+                                        <Button type='submit' variant='primary'>
+                                            Submit
+                                        </Button>
+                                    </Form>
+                                </ListGroup.Item>
+                            }
 
-                                {manga.reviews.map((review) => (
-                                    <ListGroup.Item key={review._id}>
-                                        <strong>{review.name}</strong>
-                                        <Rating value={review.rating} />
-                                        <p>{review.createdAt.substring(0, 10)}</p>
-                                        <p>{review.comment}</p>
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        </Col>
+                            {manga.reviews.map((review) => (
+                                <ListGroup.Item key={review._id}>
+                                    <strong>{review.name}</strong>
+                                    <Rating value={review.rating} />
+                                    <p>{review.createdAt.substring(0, 10)}</p>
+                                    <p>{review.comment}</p>
+                                </ListGroup.Item>
+                            ))}
+                        </ListGroup>
                     </Row>
                 </>
             )

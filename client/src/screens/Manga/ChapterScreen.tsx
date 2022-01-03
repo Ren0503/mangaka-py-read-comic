@@ -17,14 +17,14 @@ import { AppDispatch } from 'store'
 import { detailChapter } from 'actions'
 
 interface MatchParams {
-    id: string
+    chapterId: string
 }
 
 interface ChapterScreenProps extends RouteComponentProps<MatchParams> { }
 
 const ChapterScreen: FunctionComponent<ChapterScreenProps> = ({
     match: {
-        params: { id }
+        params: { chapterId }
     },
     history
 }: ChapterScreenProps) => {
@@ -34,8 +34,8 @@ const ChapterScreen: FunctionComponent<ChapterScreenProps> = ({
     )
     
     useEffect(() => {
-        dispatch(detailChapter(id))
-    }, [id, dispatch])
+        dispatch(detailChapter(chapterId))
+    }, [chapterId, dispatch])
 
     const chapterDetailDisplay = () => {
         if (loading) return <Loader />

@@ -14,7 +14,7 @@ import 'slick-carousel/slick/slick-theme.css'
 
 const settings = {
     className: "center",
-    centerMode: false,
+    centerMode: true,
     infinite: true,
     centerPadding: "60px",
     slidesToShow: 4,
@@ -96,7 +96,7 @@ const TopManga = ({ isSidebar = true }: TopMangaProps) => {
                                 <img src={manga.image} />
                                 <div className="content-manga">
                                     <h4 className="name">{manga.name}</h4>
-                                    <p>{manga.description}</p>
+                                    <p>{manga.description.substring(0, 60)}</p>
                                 </div>
                             </div>
                         </>

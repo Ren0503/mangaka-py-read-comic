@@ -12,14 +12,14 @@ import { AppDispatch } from 'store'
 import { ReduxState } from 'types/ReduxState'
 
 interface MatchParams {
-    id: string
+    authorId: string
 }
 
 interface AuthorScreenProps extends RouteComponentProps<MatchParams> { }
 
 const AuthorScreen: FunctionComponent<AuthorScreenProps> = ({
     match: {
-        params: { id }
+        params: { authorId }
     }
 }: AuthorScreenProps) => {
     const dispatch = useDispatch<AppDispatch>()
@@ -28,8 +28,8 @@ const AuthorScreen: FunctionComponent<AuthorScreenProps> = ({
     )
 
     useEffect(() => {
-        dispatch(detailAuthor(id))
-    }, [id, dispatch])
+        dispatch(detailAuthor(authorId))
+    }, [authorId, dispatch])
 
     const authorDetailDisplay = () => {
         if (loading) return <Loader />

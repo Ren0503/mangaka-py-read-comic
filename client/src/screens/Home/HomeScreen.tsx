@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Col, Row, Container } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Col, Row, Container, ButtonGroup, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, RouteComponentProps } from 'react-router-dom'
 
@@ -14,6 +14,7 @@ import { AppDispatch } from 'store'
 import { listMangas } from 'actions'
 import { ReduxState } from 'types/ReduxState'
 import { MangaSkeleton } from 'components/skeleton'
+import { MangaList } from 'types/manga'
 
 interface MatchParams {
     keyword: string
@@ -27,6 +28,7 @@ const HomeScreen = ({
     }
 }: HomeScreenProps) => {
     const pageNumber = pgNumber || '1'
+    const [sortType, setSortType] = useState<string>('Newest');
 
     const dispatch = useDispatch<AppDispatch>()
     const { mangas, loading, error, page, pages } = useSelector(
@@ -37,7 +39,22 @@ const HomeScreen = ({
         dispatch(listMangas(keyword, pageNumber))
     }, [dispatch, keyword, pageNumber])
 
-    const displayProducts = () => {
+    const handleSorting = () => {
+        switch (sortType) {
+            case 'Rating':
+                return (a: MangaList, b: MangaList) => b.rating - a.rating
+            case 'Views':
+                return (a: MangaList, b: MangaList) => b.views - a.views
+            case 'Newest':
+                return (a: MangaList, b: MangaList) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+            case 'Oldest':
+                return (a: MangaList, b: MangaList) => new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf()
+            default:
+                break
+        }
+    }
+
+    const displayMangas = () => {
         if (loading) return <MangaSkeleton />
         else if (error) return <Message variant='danger'>{error}</Message>
         else
@@ -46,8 +63,24 @@ const HomeScreen = ({
                     <Col md={9}>
                         <>
                             <h2>Latest Manga</h2>
+                            <ButtonGroup className="text-right">
+                                <Button onClick={() => setSortType('Rating')}>
+                                    Rating
+                                </Button>
+                                <Button onClick={() => setSortType('Views')}>
+                                    Views
+                                </Button>
+                                <Button onClick={() => setSortType('Newest')}>
+                                    Newest
+                                </Button>
+                                <Button onClick={() => setSortType('Oldest')}>
+                                    Oldest
+                                </Button>
+                            </ButtonGroup>
                             <Row>
-                                {mangas.map((manga) => (
+                                {mangas
+                                    ?.sort(handleSorting())
+                                    .map((manga) => (
                                     <Col sm={12} md={6} lg={4} xl={3} key={manga._id}>
                                         <MangaCard manga={manga} />
                                     </Col>
@@ -70,14 +103,14 @@ const HomeScreen = ({
     }
 
     return (
-        <>
-            <h1>Browser Manga</h1>
+        <Container fluid>
+            <h2>Browser Manga</h2>
             <TopManga isSidebar={false} />
 
             <Container>
-                {displayProducts()}
+                {displayMangas()}
             </Container>
-        </>
+        </Container>
     )
 }
 

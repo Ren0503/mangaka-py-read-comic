@@ -8,9 +8,9 @@ export interface Manga {
     description: string
     status: string
     views: number
-    star: number
+    rating: number
     favorites: number
-    numComments: number
+    numReviews: number
     chapters: Array<Chapter>
     createdAt: string
 }

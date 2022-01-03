@@ -49,16 +49,12 @@ def getDetailAuthor(request, pk):
 def searchAdvanced(request):
     try:
         query = request.query_params.getlist('keyword', '')
-        sort = request.query_params.get('sort')
-
-        if sort == None:
-            sort = '-createdAt'
 
         for i in range(len(query)):
             query[i] = query[i].capitalize()
         print(query)
 
-        mangas = Manga.objects.filter(genres__name__in=query).order_by(sort).distinct()
+        mangas = Manga.objects.filter(genres__name__in=query).order_by('-createdAt').distinct()
 
         page = request.query_params.get('page')
         paginator = Paginator(mangas, 12)

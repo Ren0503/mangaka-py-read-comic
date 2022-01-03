@@ -1,0 +1,91 @@
+/** Button */
+.btn {
+    border-radius: 15px;
+}
+
+.btn-theme {
+    background: linear-gradient(45deg, #ffdc0f, #ff6800);
+    color: #ddd;
+}
+
+.btn-theme:hover {
+    background-color: #ffff07;
+}
+
+/** Navigation */
+.page-link {
+    border: none;
+    border-radius: 50%;
+}
+
+.page-item.active .page-link {
+    border-radius: 50%;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: linear-gradient(45deg, #ffdc0f, #ff6800);
+    border-color: #fff;
+}
+  
+.page-link {
+    color: #ff6800;
+    margin: 5px;
+}
+
+/** Slide **/ 
+.slick-prev, .slick-next {
+    background: #333;
+    border-radius: 50%;
+}
+  
+.slick-prev:focus, .slick-next:focus, .slick-prev:hover, .slick-next:hover{
+    background-color: #000;
+}
+
+/** Tag */
+.tag {
+    background: #eee;
+    border-radius: 3px 0 0 3px;
+    color: #999;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+}
+  
+.tag::before {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content: '';
+    height: 6px;
+    left: 10px;
+    position: absolute;
+    width: 6px;
+    top: 10px;
+}
+  
+.tag::after {
+    background: #fff;
+    border-bottom: 13px solid transparent;
+    border-left: 10px solid #eee;
+    border-top: 13px solid transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+  
+.tag:hover {
+    background-color: #ff6800;
+    color: white;
+}
+  
+.tag:hover::after {
+     border-left-color: #ff6800; 
+}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, RouteComponentProps } from 'react-router-dom'
 
@@ -13,6 +13,7 @@ import { MangaCard, TopManga } from 'components/manga'
 import { AppDispatch } from 'store'
 import { listMangas } from 'actions'
 import { ReduxState } from 'types/ReduxState'
+import { MangaSkeleton } from 'components/skeleton'
 
 interface MatchParams {
     keyword: string
@@ -37,13 +38,14 @@ const HomeScreen = ({
     }, [dispatch, keyword, pageNumber])
 
     const displayProducts = () => {
-        if (loading) return <Loader />
+        if (loading) return <MangaSkeleton />
         else if (error) return <Message variant='danger'>{error}</Message>
         else
             return (
                 <Row>
                     <Col md={9}>
                         <>
+                            <h2>Latest Manga</h2>
                             <Row>
                                 {mangas.map((manga) => (
                                     <Col sm={12} md={6} lg={4} xl={3} key={manga._id}>
@@ -69,10 +71,12 @@ const HomeScreen = ({
 
     return (
         <>
-            <h1>Latest Manga</h1>
+            <h1>Browser Manga</h1>
             <TopManga isSidebar={false} />
 
-            {displayProducts()}
+            <Container>
+                {displayProducts()}
+            </Container>
         </>
     )
 }

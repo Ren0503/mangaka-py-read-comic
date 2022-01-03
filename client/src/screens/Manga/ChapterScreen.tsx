@@ -44,13 +44,13 @@ const ChapterScreen: FunctionComponent<ChapterScreenProps> = ({
             return <Message variant='danger'>Chapter Not Found</Message>
         else
             return (
-                <>
+                <>                        
+                    <h1>{chapter.name}</h1>
                     <FormContainer>
-                        <h1>{chapter.name}</h1>
 
                         {chapter.chapterImages.map((chapImg) => (
                             <Image src={chapImg.image} alt={chapImg._id} fluid/>
-                        ))}s
+                        ))}
                     </FormContainer>
                 </>
             )

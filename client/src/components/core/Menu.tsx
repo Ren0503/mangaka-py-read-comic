@@ -69,9 +69,11 @@ const Menu = ({ isNavbar = true }: MenuProps) => {
                 <>
                     <Figure>
                         {genres.map((genre) => (
-                            <Badge className="tag">
-                                {genre.name}
-                            </Badge>
+                            <Link to={`/genre/${genre._id}`}>
+                                <div className="tag" key={genre._id}>
+                                    {genre.name}
+                                </div>
+                            </Link>
                         ))}
                     </Figure>
                 </>

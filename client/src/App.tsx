@@ -11,7 +11,7 @@ import MangaRoutes from 'routes/MangaRoutes'
 
 import image from 'assets/scrollToTop.png'
 
-import "styles/base.css"
+import "styles/modules.css"
 import "styles/layout.css"
 import GenreRoutes from 'routes/GenreRoutes'
 
@@ -43,8 +43,8 @@ const App = () => {
             <Header />
             <Menu />
             <main className='py-3'>
+                <HomeRoutes />
                 <Container>
-                    <HomeRoutes />
                     <AuthRoutes />
                     <GenreRoutes />
                     <MangaRoutes />

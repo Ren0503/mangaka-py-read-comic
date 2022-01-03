@@ -98,34 +98,43 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                             <Image src={manga.image} alt={manga.name} fluid />
                         </Col>
                         <Col md={8}>
+                            <Rating value={manga.rating} />
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
-                                    Author: {manga.author.name}
+                                    Author:
+                                    <Link to={`/author/${manga.author._id}`}>
+                                        {manga.author.name}
+                                    </Link>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     Status: {manga.status}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    Genres: {manga.genres.map((genre) => (<Badge> {genre.name} </Badge>))}
+                                    Genres: {manga.genres.map((genre) => (
+                                        <Link to={`/genre/${genre._id}`}>
+                                            <div className="tag" key={genre._id}>
+                                                {genre.name}
+                                            </div>
+                                        </Link>
+                                    ))}
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     Views: {manga.views}
                                 </ListGroup.Item>
                             </ListGroup>
-                            <Rating value={manga.star} />
                             <Button
                                 type="button"
                                 className="btn-red"
                                 onClick={() => addFavoriteHandler(manga._id)}
                             >
-                                Add to Favorite
+                                <i className='fas fa-heart'></i> Favorite/ {manga.favorites}
                             </Button>
                         </Col>
                     </Row>
-                    <Row>
+                    <div>
                         <h4>Description</h4>
                         <p>{manga.description}</p>
-                    </Row>
+                    </div>
                     <h4>Chapters</h4>
                     <Table>
                         <thead>

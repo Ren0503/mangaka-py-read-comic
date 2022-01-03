@@ -14,7 +14,7 @@ class MangaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_chapters(self, obj):
-        chapters = obj.chapter_set.all()
+        chapters = obj.chapter_set.all().order_by('-createdAt')
         serializer = ChapterSerializer(chapters, many=True)
         return serializer.data
 

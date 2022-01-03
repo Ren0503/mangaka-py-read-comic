@@ -5,5 +5,6 @@ export interface Genre {
 }
 
 export interface Author {
+    _id: string
     name: string
 }

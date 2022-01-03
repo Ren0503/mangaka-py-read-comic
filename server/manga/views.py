@@ -20,16 +20,12 @@ from rest_framework import status
 @api_view(['GET'])
 def getMangas(request):
     query = request.query_params.get('keyword')
-    sort = request.query_params.get('sort')
 
     if query == None:
         query = ''
 
-    if sort == None:
-        sort = '-createdAt'
-
     mangas = Manga.objects.filter(
-        name__icontains=query).order_by(sort)
+        name__icontains=query).order_by('-createdAt')
 
     page = request.query_params.get('page')
     paginator = Paginator(mangas, 12)

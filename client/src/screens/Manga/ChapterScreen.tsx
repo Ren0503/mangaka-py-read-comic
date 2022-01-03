@@ -14,7 +14,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FormContainer, Loader, Message } from 'components/shared'
 import { ReduxState } from 'types/ReduxState'
 import { AppDispatch } from 'store'
-import { detailChapter, listChapter } from 'actions'
+import { detailChapter } from 'actions'
+import { SelectChapter } from 'components/manga'
 
 interface MatchParams {
     mangaId: string
@@ -27,49 +28,25 @@ const ChapterScreen: FunctionComponent<ChapterScreenProps> = ({
     match: {
         params: { mangaId, chapterId }
     },
-    history
 }: ChapterScreenProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const { chapter, loading, error } = useSelector(
         (state: ReduxState) => state.chapterDetail
     )
 
-    const {
-        chapters: chapterList,
-        loading: loadingList,
-        error: errorList,
-    } = useSelector((state: ReduxState) => state.chapterList)
-
     useEffect(() => {
         dispatch(detailChapter(chapterId))
-
-        if (chapterList.length === 0) {
-            dispatch(listChapter(mangaId))
-            console.log(chapterList)
-        }
     }, [chapterId, dispatch])
 
     const chapterDetailDisplay = () => {
-        if (loading || loadingList) return <Loader />
-        else if (error || errorList) return <Message variant='danger'>{error}</Message>
+        if (loading) return <Loader />
+        else if (error) return <Message variant='danger'>{error}</Message>
         else if (!chapter)
             return <Message variant='danger'>Chapter Not Found</Message>
         else
             return (
                 <>
-                    <div className='choose align-center text-center'>
-                        <i className='fas fa-arrow-left'></i>
-                        <Form.Select aria-label={chapter.name}>
-                            {chapterList.map((chap) => (
-                                <option value={chap.name}>
-                                    <Link to={`/manga/${mangaId}/chapter/${chap._id}`}>
-                                        {chap.name}
-                                    </Link>
-                                </option>
-                            ))}
-                        </Form.Select>
-                        <i className='fas fa-arrow-right'></i>
-                    </div>
+                    <SelectChapter mangaId={mangaId} />
                     <h1>{chapter.name}</h1>
                     <FormContainer>
 

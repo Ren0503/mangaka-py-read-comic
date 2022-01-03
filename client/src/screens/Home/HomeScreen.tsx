@@ -105,16 +105,16 @@ const HomeScreen = ({
     }
 
     return (
-        <Container>
-            <div className="my-5">
+        <div>
+            <div className="my-5 mx-5">
                 <h4><strong>Browser Manga</strong></h4>
                 <TopManga isSidebar={false} />
             </div>
 
-            <div>
+            <Container>
                 {displayMangas()}
-            </div>
-        </Container>
+            </Container>
+        </div>
     )
 }
 

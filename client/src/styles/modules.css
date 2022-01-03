@@ -89,3 +89,8 @@
 .tag:hover::after {
     border-left-color: #ff6800; 
 }
+
+/** Dropdown */
+.dropdown-menu {
+    width: 20rem;
+}

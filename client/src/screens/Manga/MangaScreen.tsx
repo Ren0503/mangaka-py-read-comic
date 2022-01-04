@@ -76,7 +76,10 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
     }
 
     const addFavoriteHandler = (mangaId: string) => {
-        dispatch(addFavorite(mangaId))
+        if (!userInfo)
+            window.alert('You need to login')
+        else 
+            dispatch(addFavorite(mangaId))
     }
 
     const handleShowMore = () => {
@@ -124,7 +127,7 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                             </ListGroup>
                             <Button
                                 type="button"
-                                className="btn-red"
+                                className="btn-theme ml-3"
                                 onClick={() => addFavoriteHandler(manga._id)}
                             >
                                 <i className='fas fa-heart'></i> Favorite/ {manga.favorites}

@@ -29,7 +29,7 @@ const SelectChapter = ({
         if (chapters.length === 0) {
             dispatch(listChapter(mangaId))
         }
-    }, [mangaId, dispatch, chapters])
+    }, [mangaId, dispatch, chapters, page])
 
     const handleChange = (value: string) => {
         history.push(`/manga/${mangaId}/chapter/${value}`)
@@ -45,6 +45,7 @@ const SelectChapter = ({
                         <i className='fas fa-arrow-left'></i>
                     )}
                     <Form.Select onChange={(e) => handleChange(e.target.value)}>
+                        <option>Choose Chapters</option>
                         {chapters.map((chapter) => (
                             <option value={chapter._id}>
                                 {chapter.name}

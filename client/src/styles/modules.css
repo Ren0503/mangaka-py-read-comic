@@ -94,3 +94,13 @@
 .dropdown-menu {
     width: 20rem;
 }
+
+/** Select Chapter */
+.choose {
+    padding: 5px;
+}
+
+.choose select {
+    border-radius: 5px;
+    padding: 5px;
+}

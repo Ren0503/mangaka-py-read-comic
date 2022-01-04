@@ -43,16 +43,10 @@ const Menu = ({ isNavbar = true }: MenuProps) => {
                                         ))}
                                     </Row>
                                 </NavDropdown>
-                                <NavDropdown title="Sort" id="collasible-nav-dropdown">
-                                    <NavDropdown.Item href="/genre">Latest</NavDropdown.Item>
-                                    <NavDropdown.Item href="/genre">Views</NavDropdown.Item>
-                                    <NavDropdown.Item href="/genre">A to Z</NavDropdown.Item>
-                                    <NavDropdown.Item href="/genre">Rating</NavDropdown.Item>
-                                </NavDropdown>
                                 <Nav.Link href="/about">For Male</Nav.Link>
                                 <Nav.Link href="/contact">For Female</Nav.Link>
                                 <Nav.Link href="/advanced-search">Search Adv</Nav.Link>
-                                <Nav.Link href="/contact">Group</Nav.Link>
+                                <Nav.Link href="/group">Group</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

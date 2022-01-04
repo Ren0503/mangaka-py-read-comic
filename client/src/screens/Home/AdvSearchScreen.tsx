@@ -62,7 +62,7 @@ const AdvSearchScreen = () => {
                 })
             }
             setIsSearch(true)
-            dispatch(searchAdv(url))
+            dispatch(searchAdv(url, ''))
         }
     }
 
@@ -96,8 +96,8 @@ const AdvSearchScreen = () => {
     }
 
     const displayMangas = () => {
-        if (loading) return <Loader />
-        else if (error) return <Message variant='danger'>{error}</Message>
+        if (loadingManga) return <Loader />
+        else if (errorManga) return <Message variant='danger'>{errorManga}</Message>
         else
             return (
                 <>
@@ -124,7 +124,9 @@ const AdvSearchScreen = () => {
 
     return (
         <Container>
-            {checkboxGenres()}
+            <div className='mx-4 my-3'>
+                {checkboxGenres()}
+            </div>
 
             {isSearch && (<>{displayMangas()}</>)}
         </Container>

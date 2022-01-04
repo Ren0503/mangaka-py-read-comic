@@ -59,13 +59,8 @@
 }
 
 .book-card .book-card__title {
-    font-size: 1.5em;
-    margin-bottom: 8px;
-}
-
-.book-card .book-card__author {
-    color: #757575;
     font-size: 1em;
+    margin-bottom: 5px;
 }
 
 .book-card:hover .book-card__book {

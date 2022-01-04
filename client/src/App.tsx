@@ -43,8 +43,8 @@ const App = () => {
             <Header />
             <Menu />
             <main className='py-3'>
-                <HomeRoutes />
                 <Container>
+                    <HomeRoutes />
                     <AuthRoutes />
                     <GenreRoutes />
                     <MangaRoutes />

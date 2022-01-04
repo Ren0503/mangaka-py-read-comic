@@ -23,7 +23,7 @@ const Search = () => {
                     placeholder='Search Manga...'
                     className='mr-sm-2 ml-sm-5'
                 />
-                <Button type='submit' variant='outline-success' className='p-2'>
+                <Button type='submit' variant='outline-warning' className='p-2'>
                     Search
                 </Button>
             </Form>

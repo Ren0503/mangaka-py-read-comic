@@ -21,10 +21,10 @@ const Footer = () => {
                     <Col lg={2} md={6}>
                         <h6 className="text-uppercase font-weight-bold mb-4 text-light">Genres</h6>
                         <ul className="list-unstyled mb-0">
-                            <li className="mb-2"><a href="#" className="text-light">Novel</a></li>
-                            <li className="mb-2"><a href="#" className="text-light">Sci Fic</a></li>
-                            <li className="mb-2"><a href="#" className="text-light">Graphic</a></li>
-                            <li className="mb-2"><a href="#" className="text-light">Poetry</a></li>
+                            <li className="mb-2"><a href="#" className="text-light">Shounen</a></li>
+                            <li className="mb-2"><a href="#" className="text-light">Drama</a></li>
+                            <li className="mb-2"><a href="#" className="text-light">Shojou</a></li>
+                            <li className="mb-2"><a href="#" className="text-light">Comedy</a></li>
                         </ul>
                     </Col>
                     <Col lg={2} md={6}>
@@ -32,7 +32,7 @@ const Footer = () => {
                         <ul className="list-unstyled mb-0">
                             <li className="mb-2"><a href="#" className="text-light">Login</a></li>
                             <li className="mb-2"><a href="#" className="text-light">Register</a></li>
-                            <li className="mb-2"><a href="#" className="text-light">Wishlist</a></li>
+                            <li className="mb-2"><a href="#" className="text-light">Favorite</a></li>
                             <li className="mb-2"><a href="#" className="text-light">Our Books</a></li>
                         </ul>
                     </Col>

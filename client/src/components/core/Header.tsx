@@ -23,7 +23,7 @@ const Header = () => {
                 <Container>
                     <Link to='/'>
                         <Navbar.Brand>
-                            <Image src={logo} alt="Logo" width="80" className="avatar" />                            
+                            <Image src={logo} alt="Logo" width="100" className="avatar" />                            
                         </Navbar.Brand>
                     </Link>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -41,7 +41,7 @@ const Header = () => {
                                 </NavDropdown>
                             ) : (
                                 <Link to='/login'>
-                                    <Nav.Link>
+                                    <Nav.Link href='/login'>
                                         Sign In
                                     </Nav.Link>
                                 </Link>

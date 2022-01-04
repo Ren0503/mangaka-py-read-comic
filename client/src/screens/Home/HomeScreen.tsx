@@ -106,7 +106,7 @@ const HomeScreen = ({
 
     return (
         <div>
-            <div className="my-5 mx-5">
+            <div className="my-2 mx-5">
                 <h4><strong>Browser Manga</strong></h4>
                 <TopManga isSidebar={false} />
             </div>

@@ -1,5 +1,7 @@
 # Mangaka
 
+![mangaka](https://github.com/Ren0503/mangaka-py-read-comic/blob/master/client/src/assets/header.png)
+
 > MangaKa là trang web đọc truyện trực tiếp miễn phí, được xây dựng bằng Django và React.
 - **server**: Chứa API cho trang web được tạo bằng Python, Django và SQLite (có thể chuyển thành MySQL)
 - **client** trang giao diện, được tạo với React, Redux Thunk và Bootstrap.
@@ -67,9 +69,12 @@
       │   └── package.json
       │
       ├── server 
-      │   ├── core
+      │   ├── chapter
+      │   ├── genres
+      │   ├── manga
       │   ├── server
       │   ├── static
+      │   ├── users
       │   ├── .gitignore
       │   ├── db.sqlite3
       │   ├── manage.py

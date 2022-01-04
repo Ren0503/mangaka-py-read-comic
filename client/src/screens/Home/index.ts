@@ -1,2 +1,2 @@
 export { default as HomeScreen } from './HomeScreen'
-export { default as SearchInputScreen } from './SearchInputScreen'
+export { default as AdvSearchScreen } from './AdvSearchScreen'

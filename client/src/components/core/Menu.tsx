@@ -51,7 +51,7 @@ const Menu = ({ isNavbar = true }: MenuProps) => {
                                 </NavDropdown>
                                 <Nav.Link href="/about">For Male</Nav.Link>
                                 <Nav.Link href="/contact">For Female</Nav.Link>
-                                <Nav.Link href="/contact">Search Adv</Nav.Link>
+                                <Nav.Link href="/advanced-search">Search Adv</Nav.Link>
                                 <Nav.Link href="/contact">Group</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>

@@ -78,7 +78,7 @@ export const searchAdv = (
 			mangas: MangaList[]
 			page: number
 			pages: number
-		}>(`/api/manga?${query}&page=${pageNumber}`)
+		}>(`/api/info/search/${query}&page=${pageNumber}`)
 		
 		dispatch({
 			type: AdvSearchActionTypes.ADV_SEARCH_SUCCESS,

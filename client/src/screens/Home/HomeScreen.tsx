@@ -63,18 +63,18 @@ const HomeScreen = ({
                     <Col md={9}>
                         <>
                             <Row className="justify-content-between">
-                                <h2>Latest Manga</h2>
+                                <h4>Latest Manga</h4>
                                 <ButtonGroup>
-                                    <Button className='btn-dark' onClick={() => setSortType('Rating')}>
+                                    <Button className='btn-light' onClick={() => setSortType('Rating')}>
                                         Rating
                                     </Button>
-                                    <Button className='btn-dark' onClick={() => setSortType('Views')}>
+                                    <Button className='btn-light' onClick={() => setSortType('Views')}>
                                         Views
                                     </Button>
-                                    <Button className='btn-dark' onClick={() => setSortType('Newest')}>
+                                    <Button className='btn-light' onClick={() => setSortType('Newest')}>
                                         Newest
                                     </Button>
-                                    <Button className='btn-dark' onClick={() => setSortType('Oldest')}>
+                                    <Button className='btn-light' onClick={() => setSortType('Oldest')}>
                                         Oldest
                                     </Button>
                                 </ButtonGroup>
@@ -106,13 +106,19 @@ const HomeScreen = ({
 
     return (
         <div>
-            <div className="my-2 mx-5">
-                <h4><strong>Browser Manga</strong></h4>
-                <TopManga isSidebar={false} />
-            </div>
+            {!keyword ? (
+                <div className="my-2 mx-5">
+                    <h4><strong>Browser Manga</strong></h4>
+                    <TopManga isSidebar={false} />
+                </div>
+            ) : (
+                <h4>Result for {keyword}</h4>
+            )}
 
             <Container>
-                {displayMangas()}
+                <div className='mt-5'>
+                    {displayMangas()}
+                </div>
             </Container>
         </div>
     )

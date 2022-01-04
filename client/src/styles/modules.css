@@ -13,6 +13,17 @@
     background-color: #ffff07;
 }
 
+.btn-light {
+    color: #000;
+    background-color: transparent;
+    border: 1px solid #ffff07;
+}
+
+.btn-light:hover {
+    background-color: #ffff07;
+    color: #fff;
+}
+
 /** Navigation */
 .page-link {
     border: none;

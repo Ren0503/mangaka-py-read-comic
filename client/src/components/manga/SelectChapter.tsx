@@ -60,7 +60,7 @@ const SelectChapter = ({
     }
 
     return (
-        <div>
+        <div className='my-4'>
             {chapterListDisplay()}
         </div>
     )

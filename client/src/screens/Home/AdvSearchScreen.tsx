@@ -87,7 +87,7 @@ const AdvSearchScreen = () => {
                                 </Col>
                             ))}
                         </Row>
-                        <Button type='submit' variant='primary'>
+                        <Button type='submit' className='btn-theme'>
                             Submit
                         </Button>
                     </Form>
@@ -107,7 +107,7 @@ const AdvSearchScreen = () => {
                     <Row>
                         {mangas
                             .map((manga) => (
-                                <Col sm={12} md={6} lg={4} xl={3} key={manga._id}>
+                                <Col sm={12} md={6} lg={4} xl={2} key={manga._id}>
                                     <MangaCard manga={manga} />
                                 </Col>
                             ))}
@@ -125,6 +125,7 @@ const AdvSearchScreen = () => {
     return (
         <Container>
             <div className='mx-4 my-3'>
+                <h4>Select Genres Want Searck</h4>
                 {checkboxGenres()}
             </div>
 

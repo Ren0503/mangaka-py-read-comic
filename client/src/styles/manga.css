@@ -4,6 +4,10 @@
     border: none;
 }
 
+.manga card-body {
+    padding: 0px;
+}
+
 .book-card {
     width: 280px;
     padding: 16px;

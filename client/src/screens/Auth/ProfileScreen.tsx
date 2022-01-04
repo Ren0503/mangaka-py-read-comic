@@ -146,7 +146,7 @@ const ProfileScreen = ({ history }: ProfileScreenProps) => {
                                     </td>
                                     <td>
                                         <Link to={`/manga/${favorite.manga._id}`}>
-                                            <Button>
+                                            <Button className="btn btn-theme">
                                                 Detail
                                             </Button>
                                         </Link>

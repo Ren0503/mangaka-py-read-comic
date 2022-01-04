@@ -5,7 +5,8 @@
 
 .btn-theme {
     background: linear-gradient(45deg, #ffdc0f, #ff6800);
-    color: #ddd;
+    color: #fff;
+    border: none;
 }
 
 .btn-theme:hover {

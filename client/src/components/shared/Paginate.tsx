@@ -19,7 +19,7 @@ const Paginate = ({
 			{pages > 1 && (
 				<Pagination>
 					{[...Array(pages).keys()].map((x) => (
-						<LinkContainer
+						<Link
 							key={x + 1}
 							to={
                                 keyword
@@ -27,7 +27,7 @@ const Paginate = ({
                                     : `/page/${x + 1}`
 							}>
 							<Pagination.Item disabled={x + 1 === page}>{x + 1}</Pagination.Item>
-						</LinkContainer>
+						</Link>
 					))}
 				</Pagination>
 			)}

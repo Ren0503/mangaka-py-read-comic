@@ -134,7 +134,7 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
                             </Button>
                         </Col>
                     </Row>
-                    <div>
+                    <div className='border mt-2'>
                         <h4>Description</h4>
                         <p>{manga.description}</p>
                     </div>

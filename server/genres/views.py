@@ -52,7 +52,6 @@ def searchAdvanced(request):
 
         for i in range(len(query)):
             query[i] = query[i].capitalize()
-        print(query)
 
         mangas = Manga.objects.filter(genres__name__in=query).order_by('-createdAt').distinct()
 

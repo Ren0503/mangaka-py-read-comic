@@ -11,7 +11,7 @@ import { AppDispatch } from 'store'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { MangaCard } from '.'
+import { MangaCard, Rating } from '.'
 
 const settings = {
     className: "center",
@@ -95,7 +95,25 @@ const TopManga = ({ isSidebar = true }: TopMangaProps) => {
             return (
                 <Slider {...settings}>
                     {mangas.map((manga) => (
-                        <MangaCard manga={manga} />
+                        <div className="book-card">
+                            <div className="book-card__cover">
+                                <div className="book-card__book">
+                                    <div className="book-card__book-front">
+                                        <img className="book-card__img" src={manga.image} />
+                                    </div>
+                                    <div className="book-card__book-back" />
+                                    <div className="book-card__book-side" />
+                                </div>
+                            </div>
+                            <div>
+                                <div className="book-card__title">
+                                    {manga.name}
+                                </div>
+                                <div className="book-card__author">
+                                    <Rating value={manga.rating} />
+                                </div>
+                            </div>
+                        </div>
                     ))}
                 </Slider>
             )

@@ -46,14 +46,14 @@ const ChapterScreen: FunctionComponent<ChapterScreenProps> = ({
         else
             return (
                 <>
-                    <SelectChapter mangaId={mangaId} />
+                    <SelectChapter mangaId={mangaId} page={chapter.number} />
                     <h1>{chapter.name}</h1>
                     <FormContainer>
-
                         {chapter.chapterImages.map((chapImg) => (
                             <Image src={chapImg.image} alt={chapImg._id} fluid />
                         ))}
                     </FormContainer>
+                    <SelectChapter mangaId={mangaId} page={chapter.number} />
                 </>
             )
     }

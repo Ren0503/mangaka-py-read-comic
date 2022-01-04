@@ -11,10 +11,12 @@ import { ReduxState } from 'types/ReduxState'
 
 interface SelectChapterProps {
     mangaId: string
+    page: number
 }
 
 const SelectChapter = ({
-    mangaId
+    mangaId,
+    page
 }: SelectChapterProps) => {
     const history = useHistory()
     const dispatch = useDispatch<AppDispatch>()
@@ -39,7 +41,9 @@ const SelectChapter = ({
         else
             return (
                 <div className='choose align-center text-center'>
-                    <i className='fas fa-arrow-left'></i>
+                    {page !== 1 && (
+                        <i className='fas fa-arrow-left'></i>
+                    )}
                     <Form.Select onChange={(e) => handleChange(e.target.value)}>
                         {chapters.map((chapter) => (
                             <option value={chapter._id}>
@@ -47,7 +51,9 @@ const SelectChapter = ({
                             </option>
                         ))}
                     </Form.Select>
-                    <i className='fas fa-arrow-right'></i>
+                    {page !== chapters.length && (
+                        <i className='fas fa-arrow-right'></i>
+                    )}
                 </div>
             )
     }

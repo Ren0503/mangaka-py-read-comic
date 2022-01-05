@@ -5,11 +5,10 @@ import {
     Col,
     Image,
     ListGroup,
-    Card,
     Button,
     Form,
-    Badge,
-    Table
+    Table,
+    Breadcrumb
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -95,6 +94,14 @@ const MangaScreen: FunctionComponent<MangaScreenProps> = ({
         else
             return (
                 <>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href='/'>
+                            Home
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item active>
+                            {manga.name}
+                        </Breadcrumb.Item>
+                    </Breadcrumb>
                     <h3 className='text-center'>{manga.name}</h3>
                     <Row>
                         <Col md={4}>

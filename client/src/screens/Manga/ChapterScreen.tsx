@@ -1,13 +1,8 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import React, { FunctionComponent, useEffect } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 import {
-    Row,
-    Col,
-    Image,
-    ListGroup,
-    Card,
-    Button,
-    Form
+    Image,    
+    Breadcrumb
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -46,6 +41,14 @@ const ChapterScreen: FunctionComponent<ChapterScreenProps> = ({
         else
             return (
                 <>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href='/'>
+                            Home
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item active>
+                            {chapter.name}
+                        </Breadcrumb.Item>
+                    </Breadcrumb>
                     <SelectChapter mangaId={mangaId} page={chapter.number} />
                     <h1>{chapter.name}</h1>
                     <FormContainer>

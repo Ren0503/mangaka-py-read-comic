@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Button, Row, Col, Container } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container, Breadcrumb } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 
 import { Loader, Message, Paginate } from 'components/shared'
 
@@ -11,7 +10,6 @@ import { ReduxState } from 'types/ReduxState'
 import { MangaCard } from 'components/manga'
 
 const AdvSearchScreen = () => {
-    const history = useHistory()
     const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([])
     const [isSearch, setIsSearch] = useState<boolean>(false)
 
@@ -45,7 +43,6 @@ const AdvSearchScreen = () => {
         }
 
         setSelectedCheckbox(selectCB)
-        console.log(selectedCheckbox)
     }
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -124,6 +121,15 @@ const AdvSearchScreen = () => {
 
     return (
         <Container>
+            <Breadcrumb>
+                <Breadcrumb.Item href="/">
+                    Home
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active>
+                    Advanced Search
+                </Breadcrumb.Item>
+            </Breadcrumb>
+
             <div className='mx-4 my-3'>
                 <h4>Select Genres Want Searck</h4>
                 {checkboxGenres()}

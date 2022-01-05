@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import React, { FunctionComponent, useEffect } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Col, Row } from 'react-bootstrap'
+import { Breadcrumb, Col, Row } from 'react-bootstrap'
 
 import { Menu } from 'components/core'
 import { MangaCard } from 'components/manga'
@@ -39,6 +39,14 @@ const GenreScreen: FunctionComponent<GenreScreenProps> = ({
         else
             return (
                 <>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href='/'>
+                            Home
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item active>
+                            {genre.name}
+                        </Breadcrumb.Item>
+                    </Breadcrumb>
                     <h3>{genre.name}</h3>
                     <p>{genre.description}</p>
                     <br />

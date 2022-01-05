@@ -16,11 +16,11 @@
 .btn-light {
     color: #000;
     background-color: transparent;
-    border: 1px solid #ffff07;
+    border: 1px solid #ff6800;
 }
 
 .btn-light:hover {
-    background-color: #ffff07;
+    background-color: #ff6800;
     color: #fff;
 }
 
@@ -115,4 +115,13 @@
 .choose select {
     border-radius: 5px;
     padding: 5px;
+}
+
+/** Choose */
+.choose i {
+    padding: 8px;
+    margin: 0 5px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
 }

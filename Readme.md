@@ -27,7 +27,7 @@
 | django-storages | [plugins/django-storages/README.md](https://github.com/jschneier/django-storages/blob/master/README.rst)|
 | djangorestframework | [plugins/djangorestframework/README.md](https://github.com/encode/django-rest-framework/blob/master/README.md) |
 | djangorestframework-simplejwt | [plugins/djangorestframework-simplejwt/README.md](https://github.com/jazzband/djangorestframework-simplejwt/blob/master/README.rst) |
-| mysqlclient | [plugins/mysqlclient/README.md](https://github.com/psycopg/psycopg2) |
+| mysqlclient | [plugins/mysqlclient/README.md](https://github.com/PyMySQL/mysqlclient/blob/main/README.md) |
 | Pillow | [plugins/Pillow/README.md](https://github.com/python-pillow/Pillow/blob/main/README.mdmd) |
 | sqlparse | [plugins/sqlparse/README.md](https://github.com/andialbrecht/sqlparse/blob/master/README.rst) |
 
@@ -81,3 +81,15 @@
       │   └── requirements.txt
       ├── .gitignore
       └── README.md
+
+
+
+### Screenshots
+
+|                                        Home                                        |                                        Detail                                        |                                        Chapter                                        |
+| :--------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+| ![](https://github.com/Ren0503/mangaka-py-read-comic/blob/master/client/src/assets/screenshots/home.png) | ![](https://github.com/Ren0503/mangaka-py-read-comic/blob/master/client/src/assets/screenshots/detail.png) | ![](https://github.com/Ren0503/mangaka-py-read-comic/blob/master/client/src/assets/screenshots/chapter.png) |
+
+|                                        Genre                                        |                                        Profile                                        |                                        Search                                        |
+| :--------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+| ![](https://github.com/Ren0503/mangaka-py-read-comic/blob/master/client/src/assets/screenshots/genre.png) | ![](https://github.com/Ren0503/mangaka-py-read-comic/blob/master/client/src/assets/screenshots/profile.png) | ![](https://github.com/Ren0503/mangaka-py-read-comic/blob/master/client/src/assets/screenshots/search.png) |

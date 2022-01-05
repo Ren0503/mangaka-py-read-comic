@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { Loader, Message } from 'components/shared'
 
@@ -33,7 +33,7 @@ const SelectChapter = ({
 
     const handleChange = (value: string) => {
         history.push(`/manga/${mangaId}/chapter/${value}`)
-    }
+    }    
 
     const chapterListDisplay = () => {
         if (loading) return <Loader />
@@ -42,7 +42,9 @@ const SelectChapter = ({
             return (
                 <div className='choose align-center text-center'>
                     {page !== 1 && (
-                        <i className='fas fa-arrow-left'></i>
+                        <Link to={`/manga/${mangaId}/chapter/${chapters.at(page - 2)?._id}`}>
+                            <i className='fas fa-arrow-left'></i>
+                        </Link>
                     )}
                     <Form.Select onChange={(e) => handleChange(e.target.value)}>
                         <option>Choose Chapters</option>
@@ -53,7 +55,9 @@ const SelectChapter = ({
                         ))}
                     </Form.Select>
                     {page !== chapters.length && (
-                        <i className='fas fa-arrow-right'></i>
+                        <Link to={`/manga/${mangaId}/chapter/${chapters.at(page)?._id}`}>
+                            <i className='fas fa-arrow-right'></i>
+                        </Link>
                     )}
                 </div>
             )
